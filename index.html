@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manual de Campo de Knox County &amp; VHS</title>
+<title>Project Zomboid — Guia de Livros, Revistas &amp; VHS</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
@@ -59,9 +59,57 @@ a{ color:var(--amber); }
   grid-template-columns: 272px 1fr;
   min-height:100vh;
 }
+
+/* ---------- mobile top bar (hidden on desktop) ---------- */
+.mobile-bar{
+  display:none;
+}
+.hamburger{
+  background:transparent; border:1px solid var(--line); border-radius:2px;
+  width:40px; height:40px; flex:0 0 auto; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; position:relative;
+}
+.hamburger span, .hamburger span::before, .hamburger span::after{
+  content:""; position:absolute; width:18px; height:2px; background:var(--tape-yellow);
+}
+.hamburger span::before{ transform:translateY(-6px); }
+.hamburger span::after{ transform:translateY(6px); }
+
+.toc-backdrop{
+  display:none;
+}
+
 @media (max-width: 900px){
   .wrap{ grid-template-columns: 1fr; }
-  nav.toc{ position:relative; height:auto; top:0; }
+
+  .mobile-bar{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    position:sticky; top:0; z-index:30;
+    background:var(--bg-raise); border-bottom:2px solid var(--tape-yellow);
+    padding:12px 18px;
+  }
+  .mobile-bar .mb-id{ display:flex; flex-direction:column; line-height:1.2; }
+  .mobile-bar .mb-tag{
+    font-family:var(--font-mono); font-size:9.5px; letter-spacing:.1em;
+    color:var(--moss-bright);
+  }
+  .mobile-bar .mb-title{
+    font-family:var(--font-display); text-transform:uppercase; font-size:16px;
+    color:var(--paper); letter-spacing:.02em;
+  }
+
+  nav.toc{
+    position:fixed; top:0; left:0; height:100vh; width:min(82vw, 300px);
+    transform:translateX(-100%); transition:transform .28s ease;
+    z-index:50; box-shadow:6px 0 28px rgba(0,0,0,.55);
+  }
+  nav.toc.open{ transform:translateX(0); }
+
+  .toc-backdrop{
+    display:block; position:fixed; inset:0; background:rgba(8,9,5,.6);
+    z-index:40; opacity:0; pointer-events:none; transition:opacity .22s;
+  }
+  .toc-backdrop.show{ opacity:1; pointer-events:auto; }
 }
 
 /* ---------- sidebar / field-manual index tab ---------- */
@@ -90,7 +138,7 @@ nav.toc .toc-head .name{
 }
 nav.toc ul{ list-style:none; margin:0; padding:0; }
 nav.toc li a{
-  display:block; padding:9px 20px;
+  display:block; padding:12px 20px;
   font-family:var(--font-mono); font-size:12.5px; letter-spacing:.02em;
   color:var(--paper-dim); text-decoration:none;
   border-left:3px solid transparent;
@@ -102,6 +150,7 @@ nav.toc .toc-sub{ opacity:.75; padding-left:34px; font-size:11.5px; }
 
 /* ---------- main ---------- */
 main{ position:relative; z-index:2; }
+
 
 /* Hero */
 .hero{
@@ -317,28 +366,51 @@ footer .fine{ margin-top:28px; font-family:var(--font-mono); font-size:11.5px; c
   footer{ padding:40px 22px; }
   .build-cols{ grid-template-columns:1fr; gap:14px; }
 }
+
+@media (max-width: 600px){
+  .skills-grid, .mag-groups, .gear-grid, .builds-grid{ grid-template-columns:1fr; }
+  .hero{ padding:56px 18px 32px; }
+  section{ padding:32px 16px; }
+  footer{ padding:32px 16px; }
+  footer ul{ columns:1; }
+  details.skill-card summary{ padding:14px 14px; gap:10px; }
+  .vol-table th, .vol-table td{ padding:8px 12px; }
+}
 </style>
 </head>
 <body>
 <div class="grain"></div>
 <div class="wrap">
 
-<nav class="toc" aria-label="Índice">
+<div class="mobile-bar">
+  <button class="hamburger" id="navToggle" aria-label="Abrir menu" aria-expanded="false"><span></span></button>
+  <div class="mb-id">
+    <span class="mb-tag">MANUAL DE CAMPO // KY-93</span>
+    <span class="mb-title">Project Zomboid</span>
+  </div>
+  <span style="width:40px;"></span>
+</div>
+<div class="toc-backdrop" id="tocBackdrop"></div>
+
+<nav class="toc" id="tocNav" aria-label="Índice">
   <div class="toc-head">
     <span class="tag">MANUAL DE CAMPO // KY-93</span>
     <span class="name">Project<br>Zomboid</span>
   </div>
   <ul>
-    <li><a href="#livros">01 · Livros de Habilidade</a></li>
-    <li><a href="#revistas">02 · Revistas de Receitas</a></li>
-    <li><a href="#vhs">03 · Fitas VHS</a></li>
-    <li><a href="#sobrevivencia">04 · Sobrevivência &amp; Progressão</a></li>
-    <li><a href="#mundo">05 · Mundo &amp; Exploração</a></li>
-    <li><a href="#equipamento">06 · Equipamento</a></li>
-    <li><a href="#tracos">07 · Tier List de Traços</a></li>
-    <li><a href="#ocupacoes">08 · Ocupações</a></li>
-    <li><a href="#builds">09 · Builds Prontas</a></li>
-    <li><a href="#fontes">10 · Fontes</a></li>
+    <li><a href="#livros">Livros de Habilidade</a></li>
+    <li><a href="#revistas">Revistas de Receitas</a></li>
+    <li><a href="#vhs">Fitas VHS</a></li>
+    <li><a href="#sobrevivencia">Sobrevivência &amp; Progressão</a></li>
+    <li><a href="#mundo">Mundo &amp; Exploração</a></li>
+    <li><a href="#base">Base &amp; Fortificação</a></li>
+    <li><a href="#equipamento">Equipamento</a></li>
+    <li><a href="#combate">Combate — Fundamentos</a></li>
+    <li><a href="#inverno">Sobrevivendo ao Inverno</a></li>
+    <li><a href="#tracos">Tier List de Traços</a></li>
+    <li><a href="#ocupacoes">Ocupações</a></li>
+    <li><a href="#builds">Builds Prontas</a></li>
+    <li><a href="#fontes">Fontes</a></li>
   </ul>
 </nav>
 
@@ -361,7 +433,7 @@ footer .fine{ margin-top:28px; font-family:var(--font-mono); font-size:11.5px; c
 
   <section id="livros">
     <div class="section-head">
-      <p class="eyebrow">01 — Estante de habilidade</p>
+      <p class="eyebrow">Estante de habilidade</p>
       <h2>Livros de habilidade por categoria</h2>
       <p class="desc">Cada uma das 24 habilidades possui exatamente 5 livros (Volumes I a V). Cada volume concede um multiplicador de XP <i>apenas dentro da sua faixa de nível</i> — ler o livro fora dessa faixa não tem efeito algum. É preciso avançar de volume conforme a habilidade sobe.</p>
     </div>
@@ -1276,7 +1348,7 @@ footer .fine{ margin-top:28px; font-family:var(--font-mono); font-size:11.5px; c
 
   <section id="revistas">
     <div class="section-head">
-      <p class="eyebrow">02 — Crafting especializado</p>
+      <p class="eyebrow">Crafting especializado</p>
       <h2>Revistas de receitas</h2>
       <p class="desc">Diferente dos livros de habilidade, as revistas de receita <i>não aumentam o multiplicador de XP</i>: elas desbloqueiam receitas específicas de crafting (montar um temporizador, usar um gerador, fazer massa de pão). A Build 42 possui <i>84 revistas</i> no total — abaixo, as famílias mais conhecidas por área.</p>
     </div>
@@ -1346,7 +1418,7 @@ footer .fine{ margin-top:28px; font-family:var(--font-mono); font-size:11.5px; c
 
   <section id="vhs" class="vhs-section">
     <div class="section-head">
-      <p class="eyebrow">03 — Sinal gravado</p>
+      <p class="eyebrow">Sinal gravado</p>
       <h2>Fitas VHS</h2>
       <p class="desc">São versões gravadas dos programas do canal <i>"Life and Living TV"</i>, que vai ao ar apenas nos primeiros dias de jogo. Depois que a transmissão acaba, é preciso encontrar as fitas em lojas de vídeo ("Hit Vids"), casas e outros contêineres para assistir aos mesmos programas e ganhar XP — uma única vez por fita, por personagem. É necessária uma TV funcionando para reproduzi-las.</p>
     </div>
@@ -1386,7 +1458,7 @@ footer .fine{ margin-top:28px; font-family:var(--font-mono); font-size:11.5px; c
 
   <section id="sobrevivencia">
     <div class="section-head">
-      <p class="eyebrow">04 — Corpo, mente e mantimento</p>
+      <p class="eyebrow">Corpo, mente e mantimento</p>
       <h2>Sobrevivência e progressão</h2>
       <p class="desc">Além dos livros e das habilidades de crafting, a Build 42 aprofundou o quanto o <i>estado do seu personagem</i> importa: moodles (humor/estado), condicionamento físico, agricultura sazonal e doenças agora exigem atenção constante — ignorar os avisos é uma das formas mais comuns de morrer sem nem ver um zumbi.</p>
     </div>
@@ -1471,7 +1543,7 @@ footer .fine{ margin-top:28px; font-family:var(--font-mono); font-size:11.5px; c
 
   <section id="mundo">
     <div class="section-head">
-      <p class="eyebrow">05 — Knox Country</p>
+      <p class="eyebrow">Knox Country</p>
       <h2>Mundo e exploração</h2>
       <p class="desc">O mapa do Project Zomboid — Knox Country — é todo desenhado à mão, sem geração procedural: todo servidor e toda partida usam o mesmo layout. A Build 42 expandiu o mapa para oeste com cidades novas e adicionou porões gerados sob vários edifícios e prédios altos em Louisville.</p>
     </div>
@@ -1492,9 +1564,87 @@ footer .fine{ margin-top:28px; font-family:var(--font-mono); font-size:11.5px; c
     <p class="tip-box">🗺️ Louisville não é uma opção de spawn no menu padrão — é um destino a ser alcançado depois de preparado. Já as cidades novas (Brandenburg, Ekron, Irvington, March Ridge, etc.) só aparecem como ponto de partida no modo Sandbox customizado.</p>
   </section>
 
+  <section id="base">
+    <div class="section-head">
+      <p class="eyebrow">Escolha e defesa</p>
+      <h2>Base e fortificação</h2>
+      <p class="desc">Uma boa base não é só uma casa bonita — é um sistema que resolve água, comida, sono, defesa e fuga ao mesmo tempo. Escolher o lugar certo economiza semanas de retrabalho.</p>
+    </div>
+
+    <div class="subhead">O que procurar num local</div>
+    <div class="gear-grid">
+      <div class="gear-card moss">
+        <span class="gear-tag">Perímetro</span>
+        <h4>Cercas e muros existentes</h4>
+        <p>Um quintal já cercado, onde zumbis não conseguem entrar, vale mais do que qualquer decoração interna — você só precisa defender o portão.</p>
+      </div>
+      <div class="gear-card moss">
+        <span class="gear-tag">Água</span>
+        <h4>Rio, lago ou poço por perto</h4>
+        <p>Elimina a dependência total de coletores de chuva depois do corte — prioridade alta em qualquer avaliação de terreno.</p>
+      </div>
+      <div class="gear-card moss">
+        <span class="gear-tag">Espaço</span>
+        <h4>Quintal para plantação e animais</h4>
+        <p>Agricultura e criação de animais da Build 42 precisam de terra livre — um lote com espaço evita precisar de uma segunda base.</p>
+      </div>
+      <div class="gear-card moss">
+        <span class="gear-tag">Logística</span>
+        <h4>Perto de posto de gasolina e rota de saque</h4>
+        <p>Uma garagem para mexer no carro e um raio de saque que não cruze a cidade inteira todo dia poupam tempo e risco.</p>
+      </div>
+    </div>
+
+    <div class="subhead">Como barricar janelas e portas</div>
+    <p class="desc" style="margin-bottom:16px;">Equipe um martelo (Martelo de Unha, Martelo de Bola, ou similar) e uma Tábua, mantenha pelo menos 2 pregos no inventário, fique ao lado da abertura e escolha a opção de barricar no menu de clique direito. Dá para reforçar os dois lados (dentro e fora) de uma mesma janela ou porta, até 4 tábuas por lado.</p>
+    <div class="table-scroll">
+    <table class="trait-table">
+      <thead><tr><th>Material</th><th>Requisito</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td class="trait-name">Tábuas de madeira</td><td>Martelo + Tábua + Pregos</td><td>Opção inicial, remove e devolve a tábua ao desmontar (os pregos se perdem).</td></tr>
+        <tr><td class="trait-name">Chapa de aço</td><td>Maçarico de solda + Chapa de Aço</td><td>Muito mais resistente — exige Soldagem e combustível para o maçarico.</td></tr>
+        <tr><td class="trait-name">Barras de aço</td><td>Maçarico de solda + 3 Barras de Aço</td><td>Alternativa à chapa quando o material disponível é outro.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="tip-box">🚪 Martelar e soldar fazem barulho — limpe os zumbis próximos antes de começar. Mantenha sempre uma saída planejada (porta destravada, corda de lençol ou ferramenta para desmontar a própria barricada) para não virar prisioneiro da sua própria base.</p>
+
+    <div class="subhead">Linha do tempo de preparação</div>
+    <div class="mag-groups">
+      <div class="mag-group">
+        <h3>Dias 1–7</h3>
+        <ul>
+          <li>Abrigo temporário, barricadas leves, saque nos arredores</li>
+          <li>Priorize um prédio com dois andares e mais de uma saída</li>
+        </ul>
+      </div>
+      <div class="mag-group">
+        <h3>Dias 7–21</h3>
+        <ul>
+          <li>Escolha a base definitiva e reforce de verdade</li>
+          <li>Instale coletores de chuva (Carpintaria 3–4) antes do corte de água</li>
+        </ul>
+      </div>
+      <div class="mag-group">
+        <h3>Dias 21–70</h3>
+        <ul>
+          <li>Gerador, canteiros de plantação, vaga para o veículo</li>
+          <li>Primeiras estruturas de secagem/preservação de comida</li>
+        </ul>
+      </div>
+      <div class="mag-group">
+        <h3>Longo prazo</h3>
+        <ul>
+          <li>Currais de animais, oficina/forja, rotas de suprimento programadas</li>
+          <li>Reavalie sempre uma segunda casa de apoio como rota de fuga</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section id="equipamento">
     <div class="section-head">
-      <p class="eyebrow">06 — Armamento &amp; logística</p>
+      <p class="eyebrow">Armamento &amp; logística</p>
       <h2>Equipamento</h2>
       <p class="desc">Guia rápido de armas corpo a corpo, armas de fogo e veículos — o essencial para decidir o que carregar e por quê.</p>
     </div>
@@ -1565,11 +1715,233 @@ footer .fine{ margin-top:28px; font-family:var(--font-mono); font-size:11.5px; c
         <p>Vans e caminhonetes de empresas (ferreiro, floricultura etc.) agora vêm carregadas com o material da própria profissão — vale abrir qualquer van "estranha" que encontrar.</p>
       </div>
     </div>
+
+    <div class="subhead">Vestuário e proteção</div>
+    <p class="desc" style="margin-bottom:16px;">Roupa é a sua armadura contra mordidas e arranhões — mas cada peça também custa isolamento térmico, velocidade e visibilidade. A proteção varia por parte do corpo e é separada em <i>Proteção contra Mordida</i> (a que realmente importa, já que mordida é fatal) e <i>Proteção contra Arranhão</i>.</p>
+    <div class="table-scroll">
+    <table class="trait-table">
+      <thead><tr><th>Prioridade</th><th>Item / camada</th><th>Por que usar</th></tr></thead>
+      <tbody>
+        <tr><td class="trait-name">Pescoço e cabeça</td><td>Capacete rígido, gola de couro</td><td>Um arranhão no pescoço pode sangrar tão rápido que mata antes de você conseguir enfaixar — proteja essa área primeiro.</td></tr>
+        <tr><td class="trait-name">Torso e antebraços</td><td>Jaqueta de couro / uniforme de bombeiro</td><td>Jaqueta de couro é o equilíbrio custo-benefício inicial; o traje de bombeiro dá a maior proteção do jogo, mas esquenta demais para uso diário.</td></tr>
+        <tr><td class="trait-name">Pernas</td><td>Calça jeans</td><td>Proteção sólida contra arranhão com pouco custo de mobilidade.</td></tr>
+        <tr><td class="trait-name">Manutenção</td><td>Costura (Tailoring)</td><td>Remende buracos e reforce peças com tiras de couro/jeans — um buraco aberto zera a proteção daquela parte do corpo.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="tip-box">🩸 Nenhuma armadura salva de ser derrubado por vários zumbis ao mesmo tempo — isso é morte instantânea mesmo com proteção máxima. Evite ser cercado antes de confiar na armadura.</p>
+
+    <div class="subhead">Mochilas e contêineres</div>
+    <p class="desc" style="margin-bottom:16px;">A capacidade da mochila define quanto peso ela aceita carregar; a redução de peso (%) define o quanto esse conteúdo pesa em você quando a mochila está equipada nas costas.</p>
+    <div class="table-scroll">
+    <table class="occ-table">
+      <thead><tr><th>Mochila</th><th>Capacidade</th><th>Redução de peso</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td class="occ-name">Mochila Militar (ALICE)</td><td class="occ-pts">28</td><td class="occ-pts">85%</td><td>A melhor combinação do jogo — rara, encontrada em zonas militares e lojas de excedente do exército.</td></tr>
+        <tr><td class="occ-name">Big Hiking / Hiking</td><td class="occ-pts">20–24</td><td class="occ-pts">75–80%</td><td>Boa opção intermediária, comum em casas e lojas de camping.</td></tr>
+        <tr><td class="occ-name">Duffel Bag</td><td class="occ-pts">18</td><td class="occ-pts">média</td><td>Ocupa uma mão, mas tem boa capacidade — útil para transportar carga extra em viagens de carro.</td></tr>
+        <tr><td class="occ-name">Sacola / Saco de Lixo</td><td class="occ-pts">15–20</td><td class="occ-pts">50%</td><td>Solução de emergência do dia 1: ocupa a mão e reduz pouco o peso, mas ajuda até achar algo melhor.</td></tr>
+        <tr><td class="occ-name">Cangurus (Fanny Pack)</td><td class="occ-pts">variável</td><td class="occ-pts">85%</td><td>Combina com uma mochila nas costas — usa os slots de frente/trás sem ocupar as mãos.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="tip-box">🎒 O traço Organizado multiplica a capacidade de qualquer contêiner em cerca de 1,3×; Desorganizado reduz para cerca de 0,7×. Antes de um combate, considere largar a mochila mais pesada — o peso reduz sua velocidade de corrida e ataque.</p>
+
+    <div class="subhead">Ferramentas essenciais</div>
+    <div class="gear-grid">
+      <div class="gear-card moss">
+        <span class="gear-tag">Construção</span>
+        <h4>Martelo &amp; Pregos</h4>
+        <p>Base da Carpintaria — barricar janelas, construir móveis e reformar abrigos desde o primeiro dia.</p>
+      </div>
+      <div class="gear-card moss">
+        <span class="gear-tag">Água &amp; comida</span>
+        <h4>Panela, Isqueiro e Recipientes</h4>
+        <p>Cozinhar com segurança e armazenar água antes do corte de energia/água — prioridade das primeiras 72h.</p>
+      </div>
+      <div class="gear-card moss">
+        <span class="gear-tag">Primeiros socorros</span>
+        <h4>Bandagens, Desinfetante e Pinça</h4>
+        <p>Arranhões viram infecção sem rotação de curativos — mantenha estoque sempre reposto.</p>
+      </div>
+      <div class="gear-card moss">
+        <span class="gear-tag">Costura</span>
+        <h4>Agulha, Linha e Tiras de Tecido</h4>
+        <p>Repara e reforça roupas — essencial para manter a proteção contra mordida/arranhão em dia.</p>
+      </div>
+      <div class="gear-card moss">
+        <span class="gear-tag">Veículos</span>
+        <h4>Chave de Fenda, Macaco e Mangueira</h4>
+        <p>Kit básico de Mecânica: trocar peças, trocar pneu e sifonar combustível de outros carros.</p>
+      </div>
+      <div class="gear-card moss">
+        <span class="gear-tag">Utilidade</span>
+        <h4>Serra, Machado &amp; Pá</h4>
+        <p>Cortar madeira, árvores e cavar sepulturas ou furos de plantio — ferramentas multiuso indispensáveis.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="combate">
+    <div class="section-head">
+      <p class="eyebrow">Espaçamento vence força bruta</p>
+      <h2>Combate — fundamentos</h2>
+      <p class="desc">Project Zomboid não recompensa quem sai batendo sem parar — recompensa quem controla distância, escolhe as brigas e sabe quando recuar. A Build 42 adicionou fadiga muscular: combates longos acumulam desgaste e pioram seu desempenho.</p>
+    </div>
+
+    <div class="subhead">O básico que mantém você vivo</div>
+    <div class="gear-grid">
+      <div class="gear-card amber">
+        <span class="gear-tag">Tecla-chave</span>
+        <h4>Empurrão (Shove)</h4>
+        <p>Empurra ou derruba um zumbi adjacente — é sua ferramenta defensiva mais importante, principalmente antes de ter uma arma confiável.</p>
+      </div>
+      <div class="gear-card amber">
+        <span class="gear-tag">Combo</span>
+        <h4>Empurrão + Pisão</h4>
+        <p>Derrube o zumbi com o empurrão, depois pise na cabeça para finalizar sem gastar durabilidade da arma. Fique de olho nos que ainda estão em pé antes de finalizar os caídos.</p>
+      </div>
+      <div class="gear-card amber">
+        <span class="gear-tag">Postura</span>
+        <h4>Guarda levantada</h4>
+        <p>Reduz a chance de arranhão/mordida quando você erra o tempo de um golpe — use ao se aproximar ou recuar de um grupo.</p>
+      </div>
+      <div class="gear-card amber">
+        <span class="gear-tag">Espaço</span>
+        <h4>Lute em vãos de porta</h4>
+        <p>Corredores e portas limitam quantos zumbis atacam por vez —no máximo dois personagens por vão, o terceiro cobre a retaguarda.</p>
+      </div>
+    </div>
+
+    <div class="subhead">Regras de ouro</div>
+    <div class="table-scroll">
+    <table class="trait-table">
+      <thead><tr><th>Situação</th><th>O que fazer</th></tr></thead>
+      <tbody>
+        <tr><td class="trait-name">Grupo grande se aproximando</td><td>Atraia 2–3 de cada vez para longe do resto, resolva e volte — nunca ataque a horda inteira de uma vez.</td></tr>
+        <tr><td class="trait-name">Sente fadiga muscular</td><td>Pare, abra distância, descanse — combates longos com o mesmo grupo de músculos pioram sua precisão e velocidade.</td></tr>
+        <tr><td class="trait-name">Multi Hit ativado (config. de mundo)</td><td>Mantenha os zumbis agrupados à sua frente, nunca em círculo ao redor — armas longas (pá, lança, taco) acertam 2–3 de uma vez.</td></tr>
+        <tr><td class="trait-name">Terreno com corpos empilhados</td><td>Corpos no chão são obstáculo de tropeço e podem virar rampa para zumbis subirem em andares superiores — limpe periodicamente.</td></tr>
+        <tr><td class="trait-name">Depois de "limpar" um lugar</td><td>Nunca assuma 100% seguro — desatenção em áreas "já limpas" é uma das causas de morte mais comuns.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="subhead">Eventos e ameaças especiais</div>
+    <p class="desc" style="margin-bottom:16px;">O <b>Evento do Helicóptero</b> é o teste de estresse mais barulhento do jogo: uma aeronave sobrevoa parte do mapa e seu som atrai zumbis de uma área enorme, mesmo sem te ver diretamente. No preset Apocalipse ele costuma ocorrer uma vez, entre o 6º e o 9º dia.</p>
+    <p class="tip-box">🚁 Se avistado, o helicóptero paira sobre você por cerca de 60 segundos reais — quebre a linha de visão (mata fechada, prédios) em vez de correr para casa: levar a horda atraída direto para a sua base é um dos erros mais comuns. Depois que o evento passa, ruas que já estavam limpas podem ter zumbis de volta — refaça a checagem antes de voltar à rotina.</p>
+  </section>
+
+  <section id="inverno">
+    <div class="section-head">
+      <p class="eyebrow">A ameaça silenciosa</p>
+      <h2>Sobrevivendo ao inverno</h2>
+      <p class="desc">Project Zomboid não tem estações fixas em calendário, mas o inverno de Knox County é implacável: hipotermia mata em silêncio, a agricultura quase para e a logística de água/comida fica muito mais apertada. Quem se prepara no verão e outono chega tranquilo — quem não se prepara, não vê a primavera.</p>
+    </div>
+
+    <div class="subhead">Roupas — vista em camadas</div>
+    <p class="desc" style="margin-bottom:16px;">O segredo não é uma peça "mágica" de inverno, e sim empilhar camadas: cada uma soma isolamento térmico, mas também peso e calor — tire camadas ao entrar em ambientes aquecidos para não superaquecer.</p>
+    <div class="gear-grid">
+      <div class="gear-card">
+        <span class="gear-tag">Camada base</span>
+        <h4>Roupa de baixo térmica</h4>
+        <p>"Long johns" e camiseta por baixo de tudo — pouco isolamento sozinha, mas é a base que segura as demais camadas.</p>
+      </div>
+      <div class="gear-card">
+        <span class="gear-tag">Camada intermediária</span>
+        <h4>Suéter ou Flanela</h4>
+        <p>Principal fonte de isolamento do conjunto — o meio-termo entre proteção térmica e mobilidade.</p>
+      </div>
+      <div class="gear-card">
+        <span class="gear-tag">Camada externa</span>
+        <h4>Jaqueta / Casaco</h4>
+        <p>Barreira contra vento e chuva — sem ela, as camadas internas perdem calor muito mais rápido, principalmente se molharem.</p>
+      </div>
+      <div class="gear-card">
+        <span class="gear-tag">Extremidades</span>
+        <h4>Luvas, Gorro/Orelheira, Cachecol</h4>
+        <p>Mãos, orelhas e pescoço perdem calor primeiro — separe um kit de extremidades só para o inverno.</p>
+      </div>
+    </div>
+    <p class="tip-box">💧 Roupa molhada destrói o isolamento e some com sua proteção térmica — chuva, sangue e suor contam. Troque para um conjunto seco assim que possível e mantenha uma muda extra guardada em saco plástico/de lixo para não molhar durante o saque.</p>
+
+    <div class="subhead">Comida — estocando antes do frio</div>
+    <p class="desc" style="margin-bottom:16px;">A colheita e a pesca rendem muito menos no inverno, e só culturas resistentes ao frio sobrevivem ao ar livre. A saída é preservar o excedente do verão/outono usando as quatro rotas do jogo:</p>
+    <div class="table-scroll">
+    <table class="trait-table">
+      <thead><tr><th>Método</th><th>Bom para</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td class="trait-name">Enlatar / Conservas em vidro</td><td>Vegetais colhidos em excesso</td><td>Precisa de vidros, tampas, vinagre/sal — dura muito tempo fora da geladeira.</td></tr>
+        <tr><td class="trait-name">Desidratação (varal/rack)</td><td>Ervas, carne em tiras, grãos</td><td>Não depende de eletricidade — ótima opção para depois do corte de energia.</td></tr>
+        <tr><td class="trait-name">Geladeira / Freezer</td><td>Carnes, laticínios, sobras</td><td>Só funciona com gerador depois do corte — geladeira retarda ~5×, freezer ~25× a decomposição.</td></tr>
+        <tr><td class="trait-name">Manteigueira (Churn)</td><td>Excesso de leite de vaca/ovelha</td><td>Transforma leite excedente em manteiga, mais compacta e duradoura.</td></tr>
+        <tr><td class="trait-name">Enlatados comprados</td><td>Estoque de segurança</td><td>Nunca estragam — reserve para emergências e complemente com o que a fazenda produzir.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="tip-box">🥬 Poucas culturas toleram plantio de inverno ao ar livre (ex.: repolho) — o resto precisa ser colhido e preservado antes da primeira geada, ou cultivado em estufa/ambiente interno.</p>
+
+    <div class="subhead">Aquecimento e energia</div>
+    <div class="gear-grid">
+      <div class="gear-card amber">
+        <span class="gear-tag">Regra de ouro</span>
+        <h4>Gerador só do lado de fora</h4>
+        <p>Nunca ligue um gerador dentro de casa — a fumaça derruba sua saúde rapidamente. Mantenha-o em área externa ventilada e evite dormir perto dele (fumaça e ruído).</p>
+      </div>
+      <div class="gear-card amber">
+        <span class="gear-tag">Mais seguro</span>
+        <h4>Lareira / Fogão a lenha do mapa</h4>
+        <p>Prefira estruturas fixas de aquecimento a fogueiras improvisadas dentro de casa — fogueiras internas têm chance de incendiar o piso de madeira ao lado.</p>
+      </div>
+      <div class="gear-card amber">
+        <span class="gear-tag">Evite</span>
+        <h4>Fogueira improvisada dentro de casa</h4>
+        <p>É a forma mais comum de perder a base inteira em um incêndio — se precisar de fogo interno, use fogareiros/churrasqueiras feitas para isso e tenha água ou extintor por perto.</p>
+      </div>
+      <div class="gear-card amber">
+        <span class="gear-tag">Truque de estrada</span>
+        <h4>Aquecedor do carro</h4>
+        <p>Ligue o motor, espere a temperatura do motor passar de 30° e ative o aquecedor no painel — ótimo abrigo de emergência durante uma nevasca, mas consome combustível mais rápido.</p>
+      </div>
+    </div>
+
+    <div class="subhead">Checklist pré-inverno</div>
+    <div class="mag-groups">
+      <div class="mag-group">
+        <h3>Antes do corte de energia/água</h3>
+        <ul>
+          <li>Encha todos os recipientes possíveis (potes, baldes, banheiras) com água da torneira</li>
+          <li>Instale coletores de chuva — mesmo na neve, ainda enchem pela metade da taxa normal</li>
+          <li>Garanta um gerador funcionando e aprenda a habilidade para operá-lo (Eletricista, Engenheiro ou revista específica)</li>
+        </ul>
+      </div>
+      <div class="mag-group">
+        <h3>Estoque de combustível e lenha</h3>
+        <ul>
+          <li>Encha vários galões de gasolina antes dos postos pararem de funcionar</li>
+          <li>Junte lenha e gravetos com antecedência — não deixe para sair cortando árvore em nevasca</li>
+        </ul>
+      </div>
+      <div class="mag-group">
+        <h3>Comida e saúde</h3>
+        <ul>
+          <li>Preserve toda a colheita do verão/outono antes da primeira geada</li>
+          <li>Separe remédios e curativos extras — resfriados são mais comuns no frio</li>
+        </ul>
+      </div>
+      <div class="mag-group">
+        <h3>Abrigo</h3>
+        <ul>
+          <li>Vede portas e janelas para reduzir perda de calor</li>
+          <li>Reserve uma muda de roupa seca completa por sobrevivente, guardada longe da chuva</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <section id="tracos">
     <div class="section-head">
-      <p class="eyebrow">07 — Criação de personagem</p>
+      <p class="eyebrow">Criação de personagem</p>
       <h2>Melhores traços — tier list (Build 42.20)</h2>
       <p class="desc">Os traços positivos custam pontos e os negativos devolvem pontos; o total precisa fechar em zero ou mais para começar a partida. Classificação baseada no consenso de guias da comunidade para a Build 42.20 (estável) — pode mudar em patches futuros. <i>Sempre confira os custos atuais na tela de criação de personagem.</i></p>
     </div>
@@ -1663,7 +2035,7 @@ footer .fine{ margin-top:28px; font-family:var(--font-mono); font-size:11.5px; c
 
   <section id="ocupacoes">
     <div class="section-head">
-      <p class="eyebrow">08 — Ponto de partida</p>
+      <p class="eyebrow">Ponto de partida</p>
       <h2>Melhores ocupações (Build 42.20)</h2>
       <p class="desc">A atualização 42.16 reformulou várias ocupações e introduziu seis novas, construídas em torno das habilidades de crafting adicionadas na Build 42.</p>
     </div>
@@ -1704,7 +2076,7 @@ footer .fine{ margin-top:28px; font-family:var(--font-mono); font-size:11.5px; c
 
   <section id="builds">
     <div class="section-head">
-      <p class="eyebrow">09 — Prontas para copiar</p>
+      <p class="eyebrow">Prontas para copiar</p>
       <h2>Builds prontas (ocupação + traços)</h2>
       <p class="desc">Combinações completas e testadas pela comunidade, prontas para copiar na tela de criação de personagem. Os valores em pontos podem variar ligeiramente conforme patches futuros da Build 42 — use como referência e ajuste no orçamento de pontos do jogo.</p>
     </div>
@@ -1820,7 +2192,7 @@ footer .fine{ margin-top:28px; font-family:var(--font-mono); font-size:11.5px; c
   </section>
 
   <footer id="fontes">
-    <p class="eyebrow">10 — Referências</p>
+    <p class="eyebrow">Referências</p>
     <ul>
       <li>PZwiki (pzwiki.net) — Category:Skill books e páginas individuais de cada livro/habilidade</li>
       <li>GGRecon — guia de lojas e fitas VHS</li>
@@ -1831,6 +2203,8 @@ footer .fine{ margin-top:28px; font-family:var(--font-mono); font-size:11.5px; c
       <li>PZfans.com — guias de exercício/fitness, doenças, mapa e mecânica de veículos</li>
       <li>build42guide.wiki — calendário de plantio e catálogo de vans/veículos da Build 42</li>
       <li>Vortex Gaming / BisectHosting / xGamingServer — guias de locais de spawn, armas e veículos</li>
+      <li>PZfans.com / build42guide.wiki / Game Rack — guias de inverno, aquecimento, geradores e preservação de comida</li>
+      <li>Bamboo Gaming / projectzomboid.wiki — guias de base, fortificação, combate e evento do helicóptero</li>
     </ul>
     <p class="fine">Informações compiladas em agosto de 2026, com base na Build 42.20 (estável). Custos de pontos de traços e ocupações podem mudar em atualizações futuras — confira sempre a tela de criação de personagem no jogo.</p>
   </footer>
@@ -1849,6 +2223,27 @@ footer .fine{ margin-top:28px; font-family:var(--font-mono); font-size:11.5px; c
   };
   document.addEventListener('scroll', setActive, {passive:true});
   setActive();
+
+  // Mobile off-canvas menu
+  const navEl = document.getElementById('tocNav');
+  const toggleBtn = document.getElementById('navToggle');
+  const backdrop = document.getElementById('tocBackdrop');
+
+  const openNav = () => {
+    navEl.classList.add('open');
+    backdrop.classList.add('show');
+    toggleBtn.setAttribute('aria-expanded','true');
+  };
+  const closeNav = () => {
+    navEl.classList.remove('open');
+    backdrop.classList.remove('show');
+    toggleBtn.setAttribute('aria-expanded','false');
+  };
+  toggleBtn.addEventListener('click', () => {
+    navEl.classList.contains('open') ? closeNav() : openNav();
+  });
+  backdrop.addEventListener('click', closeNav);
+  links.forEach(a => a.addEventListener('click', () => { if(window.innerWidth <= 900) closeNav(); }));
 </script>
 </body>
 </html>
