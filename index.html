@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Campo de Knox County &amp; VHS</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  --bg: #12130d;
+  --bg-raise: #1a1c13;
+  --bg-raise-2: #21241a;
+  --line: #3a3d2c;
+  --paper: #e9e1c7;
+  --paper-dim: #d9cfab;
+  --ink: #201d15;
+  --ink-soft: #4a4736;
+  --rust: #a8412d;
+  --rust-bright: #c85338;
+  --moss: #6b7a42;
+  --moss-bright: #8ea25a;
+  --amber: #cf9a3e;
+  --tape-yellow: #e8b93a;
+  --tape-black: #171712;
+  --s-tier: #c85338;
+  --a-tier: #cf9a3e;
+  --b-tier: #6b7a42;
+  --font-display: 'Oswald', sans-serif;
+  --font-body: 'Spectral', serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--paper);
+  font-family:var(--font-body);
+  line-height:1.55;
+  font-size:16px;
+}
+
+::selection{ background:var(--rust); color:var(--paper); }
+
+a{ color:var(--amber); }
+
+/* ---------- texture ---------- */
+.grain{
+  position:fixed; inset:0; pointer-events:none; z-index:1;
+  opacity:.05; mix-blend-mode:overlay;
+  background-image:repeating-linear-gradient(0deg, #fff 0px, transparent 1px, transparent 2px, #fff 3px);
+}
+
+/* ---------- layout shell ---------- */
+.wrap{
+  display:grid;
+  grid-template-columns: 272px 1fr;
+  min-height:100vh;
+}
+@media (max-width: 900px){
+  .wrap{ grid-template-columns: 1fr; }
+  nav.toc{ position:relative; height:auto; top:0; }
+}
+
+/* ---------- sidebar / field-manual index tab ---------- */
+nav.toc{
+  position:sticky; top:0; align-self:start; height:100vh; overflow-y:auto;
+  background:var(--bg-raise);
+  border-right:3px solid var(--tape-yellow);
+  padding:22px 0 40px;
+  z-index:5;
+}
+nav.toc .toc-head{
+  padding:0 20px 16px;
+  border-bottom:1px solid var(--line);
+  margin-bottom:10px;
+}
+nav.toc .toc-head .tag{
+  font-family:var(--font-mono);
+  font-size:11px; letter-spacing:.12em;
+  color:var(--moss-bright);
+  display:block; margin-bottom:6px;
+}
+nav.toc .toc-head .name{
+  font-family:var(--font-display);
+  font-size:22px; font-weight:700; letter-spacing:.02em;
+  color:var(--paper); text-transform:uppercase; line-height:1.15;
+}
+nav.toc ul{ list-style:none; margin:0; padding:0; }
+nav.toc li a{
+  display:block; padding:9px 20px;
+  font-family:var(--font-mono); font-size:12.5px; letter-spacing:.02em;
+  color:var(--paper-dim); text-decoration:none;
+  border-left:3px solid transparent;
+}
+nav.toc li a:hover, nav.toc li a.active{
+  background:var(--bg-raise-2); color:var(--tape-yellow); border-left-color:var(--rust-bright);
+}
+nav.toc .toc-sub{ opacity:.75; padding-left:34px; font-size:11.5px; }
+
+/* ---------- main ---------- */
+main{ position:relative; z-index:2; }
+
+/* Hero */
+.hero{
+  position:relative;
+  padding:88px 56px 64px;
+  background:
+    radial-gradient(ellipse at 20% -10%, rgba(168,65,45,.25), transparent 55%),
+    linear-gradient(180deg, var(--bg-raise) 0%, var(--bg) 100%);
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+}
+.hero::before{
+  content:"";
+  position:absolute; inset:0;
+  background-image:
+    repeating-linear-gradient(115deg, transparent 0 38px, rgba(255,255,255,.025) 38px 40px);
+  pointer-events:none;
+}
+.hero .rec{
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--font-mono); font-size:12px; letter-spacing:.12em;
+  color:var(--rust-bright); border:1px solid var(--rust); padding:5px 12px;
+  border-radius:2px; margin-bottom:26px;
+}
+.hero .rec .dot{
+  width:8px;height:8px;border-radius:50%;background:var(--rust-bright);
+  animation:blink 1.4s infinite;
+}
+@keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:.15;} }
+.hero h1{
+  font-family:var(--font-display); text-transform:uppercase;
+  font-weight:700; letter-spacing:.01em;
+  font-size:clamp(40px,6vw,76px); line-height:.98; margin:0 0 6px;
+  color:var(--paper);
+}
+.hero h1 span{ color:var(--tape-yellow); }
+.hero .subtitle{
+  font-family:var(--font-display); font-weight:500; text-transform:uppercase;
+  letter-spacing:.06em; font-size:clamp(15px,2vw,20px); color:var(--paper-dim);
+  margin:0 0 28px;
+}
+.hero p.lede{
+  max-width:640px; font-size:17px; color:var(--paper-dim);
+  font-style:italic; border-left:3px solid var(--moss); padding-left:16px;
+}
+.hero .meta-strip{
+  display:flex; flex-wrap:wrap; gap:28px; margin-top:36px;
+  font-family:var(--font-mono); font-size:12px; color:var(--paper-dim);
+}
+.hero .meta-strip b{ color:var(--tape-yellow); font-weight:600; display:block; font-size:20px; font-family:var(--font-display); }
+
+/* hazard divider */
+.hazard{
+  height:14px;
+  background:repeating-linear-gradient(-45deg, var(--tape-yellow) 0 18px, var(--tape-black) 18px 36px);
+}
+
+/* section generic */
+section{ padding:56px; border-bottom:1px solid var(--line); }
+section .section-head{ margin-bottom:30px; max-width:820px; }
+section .eyebrow{
+  font-family:var(--font-mono); font-size:12px; letter-spacing:.14em;
+  color:var(--rust-bright); text-transform:uppercase; margin:0 0 10px;
+}
+section h2{
+  font-family:var(--font-display); text-transform:uppercase; font-weight:700;
+  font-size:clamp(26px,3.4vw,40px); margin:0 0 12px; color:var(--paper);
+  letter-spacing:.01em;
+}
+section .desc{ color:var(--paper-dim); font-size:16px; max-width:760px; }
+section .desc i{ color:var(--tape-yellow); font-style:italic; }
+
+/* xp table */
+.xp-table{
+  width:100%; max-width:720px; border-collapse:collapse; font-family:var(--font-mono); font-size:13.5px;
+  margin-top:24px; background:var(--bg-raise); border:1px solid var(--line);
+}
+.xp-table th, .xp-table td{ padding:10px 16px; text-align:left; border-bottom:1px solid var(--line); }
+.xp-table th{ color:var(--tape-yellow); text-transform:uppercase; letter-spacing:.06em; font-size:11.5px; }
+.xp-table td.mult{ color:var(--moss-bright); font-weight:600; }
+
+/* skills grid */
+.skills-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(340px,1fr)); gap:14px; margin-top:8px; }
+details.skill-card{
+  background:var(--bg-raise); border:1px solid var(--line); border-radius:2px;
+  transition:border-color .15s;
+}
+details.skill-card[open]{ border-color:var(--moss); }
+details.skill-card summary{
+  list-style:none; cursor:pointer; display:flex; align-items:center; gap:12px;
+  padding:16px 18px; position:relative;
+}
+details.skill-card summary::-webkit-details-marker{ display:none; }
+details.skill-card summary::after{
+  content:"+"; margin-left:auto; font-family:var(--font-mono); font-size:18px; color:var(--paper-dim);
+}
+details.skill-card[open] summary::after{ content:"–"; color:var(--tape-yellow); }
+.skill-icon{ font-size:22px; }
+.skill-names{ display:flex; flex-direction:column; }
+.skill-pt{ font-family:var(--font-display); font-size:16px; text-transform:uppercase; letter-spacing:.02em; color:var(--paper); }
+.skill-en{ font-family:var(--font-mono); font-size:11px; color:var(--paper-dim); font-style:italic; }
+.skill-count{ font-family:var(--font-mono); font-size:10.5px; color:var(--moss-bright); border:1px solid var(--moss); padding:2px 8px; border-radius:10px; white-space:nowrap;}
+.vol-table{ width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:12.5px; border-top:1px solid var(--line); }
+.vol-table th{ text-align:left; padding:8px 18px; color:var(--paper-dim); font-weight:500; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; background:var(--bg-raise-2); }
+.vol-table td{ padding:8px 18px; border-top:1px solid var(--line); color:var(--paper-dim); }
+.vol-table td.vol{ color:var(--tape-yellow); font-weight:600; width:36px; }
+.vol-table td.rng{ width:110px; color:var(--moss-bright); }
+.vol-table td.title{ color:var(--paper); font-family:var(--font-body); font-style:italic; font-size:14px; }
+
+.expand-controls{ margin:18px 0 0; display:flex; gap:10px; }
+.expand-controls button{
+  font-family:var(--font-mono); font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  background:transparent; border:1px solid var(--line); color:var(--paper-dim);
+  padding:7px 14px; border-radius:2px; cursor:pointer;
+}
+.expand-controls button:hover{ border-color:var(--tape-yellow); color:var(--tape-yellow); }
+
+/* magazines */
+.mag-groups{ display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:20px; margin-top:8px;}
+.mag-group{ background:var(--bg-raise); border:1px solid var(--line); border-left:4px solid var(--amber); padding:18px 20px; border-radius:2px; }
+.mag-group h3{ font-family:var(--font-display); text-transform:uppercase; font-size:16px; margin:0 0 10px; color:var(--tape-yellow); letter-spacing:.02em;}
+.mag-group ul{ margin:0; padding-left:18px; color:var(--paper-dim); font-size:14px; }
+.mag-group li{ margin-bottom:8px; }
+.mag-group li b{ color:var(--paper); font-style:italic; font-weight:600; font-family:var(--font-body); }
+
+/* VHS section */
+.vhs-section{ background:linear-gradient(180deg, var(--bg-raise) 0%, var(--bg) 100%); }
+.tv-frame{
+  border:2px solid var(--line); background:var(--tape-black); padding:2px; border-radius:4px; margin-top:24px;
+  box-shadow: 0 0 0 6px rgba(0,0,0,.3);
+}
+table.vhs-table{ width:100%; border-collapse:collapse; font-family:var(--font-mono); font-size:13px; background:#0d0f09;}
+table.vhs-table th{ text-align:left; padding:12px 18px; color:var(--tape-yellow); border-bottom:2px solid var(--rust); text-transform:uppercase; letter-spacing:.06em; font-size:11px;}
+table.vhs-table td{ padding:11px 18px; border-bottom:1px solid #262a1a; color:var(--paper-dim); }
+table.vhs-table tr:hover td{ background:rgba(232,185,58,.05); color:var(--paper); }
+table.vhs-table td.tape-title{ color:var(--paper); font-style:italic; }
+.tip-box{
+  margin-top:20px; font-family:var(--font-mono); font-size:13px; color:var(--moss-bright);
+  border:1px dashed var(--moss); padding:14px 18px; max-width:720px; border-radius:2px;
+}
+
+/* gear / town cards (reused across new sections) */
+.gear-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(250px,1fr)); gap:14px; margin-top:8px;}
+.gear-card{ background:var(--bg-raise); border:1px solid var(--line); border-left:4px solid var(--rust-bright); padding:16px 18px; border-radius:2px;}
+.gear-card h4{ font-family:var(--font-display); text-transform:uppercase; font-size:15px; color:var(--paper); margin:0 0 4px; letter-spacing:.02em;}
+.gear-card .gear-tag{ font-family:var(--font-mono); font-size:10.5px; color:var(--tape-yellow); text-transform:uppercase; letter-spacing:.06em; display:block; margin-bottom:8px;}
+.gear-card p{ font-size:13.5px; color:var(--paper-dim); margin:0; line-height:1.5;}
+.gear-card.moss{ border-left-color:var(--moss); }
+.gear-card.amber{ border-left-color:var(--amber); }
+
+.subhead{ font-family:var(--font-display); text-transform:uppercase; letter-spacing:.04em; color:var(--paper); font-size:18px; margin:36px 0 12px;}
+.subhead:first-of-type{ margin-top:8px; }
+
+/* traits */
+.tier-row{ margin-bottom:34px; }
+.tier-label{
+  display:inline-flex; align-items:center; gap:10px; margin-bottom:14px;
+}
+.tier-badge{
+  font-family:var(--font-display); font-weight:700; font-size:22px; width:44px; height:44px;
+  display:flex; align-items:center; justify-content:center; border-radius:4px; color:#12130d;
+}
+.tier-badge.S{ background:var(--s-tier); }
+.tier-badge.A{ background:var(--a-tier); }
+.tier-badge.B{ background:var(--b-tier); }
+.tier-badge.free{ background:var(--moss-bright); }
+.tier-badge.trap{ background:var(--rust-bright); }
+.tier-caption{ font-family:var(--font-mono); font-size:12.5px; color:var(--paper-dim); text-transform:uppercase; letter-spacing:.04em; }
+
+table.trait-table{ width:100%; border-collapse:collapse; font-size:14.5px; }
+table.trait-table th{ text-align:left; padding:10px 14px; font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--paper-dim); border-bottom:1px solid var(--line);}
+table.trait-table td{ padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top; color:var(--paper-dim); }
+table.trait-table td.trait-name{ color:var(--paper); font-weight:600; font-family:var(--font-body); white-space:nowrap; }
+table.trait-table td.pts{ font-family:var(--font-mono); font-weight:600; white-space:nowrap; }
+td.pts.neg{ color:var(--moss-bright); }
+td.pts.pos{ color:var(--rust-bright); }
+.table-scroll{ overflow-x:auto; }
+
+/* occupations */
+table.occ-table{ width:100%; border-collapse:collapse; font-size:14px; margin-bottom:8px;}
+table.occ-table th{ text-align:left; padding:10px 14px; font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--tape-yellow); border-bottom:2px solid var(--line);}
+table.occ-table td{ padding:12px 14px; border-bottom:1px solid var(--line); color:var(--paper-dim); vertical-align:top;}
+table.occ-table td.occ-name{ color:var(--paper); font-weight:600; font-family:var(--font-display); text-transform:uppercase; font-size:13px; letter-spacing:.02em; white-space:nowrap;}
+table.occ-table td.occ-pts{ font-family:var(--font-mono); color:var(--moss-bright); font-weight:600; white-space:nowrap;}
+.occ-subhead{ font-family:var(--font-display); text-transform:uppercase; letter-spacing:.04em; color:var(--paper); font-size:18px; margin:36px 0 12px;}
+
+/* builds */
+.builds-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(420px,1fr)); gap:24px; margin-top:10px;}
+.build-card{ background:var(--bg-raise); border:1px solid var(--line); border-radius:3px; overflow:hidden; }
+.build-card .build-head{ padding:18px 22px; background:var(--bg-raise-2); border-bottom:2px solid var(--tape-yellow); }
+.build-card .build-head h3{ font-family:var(--font-display); text-transform:uppercase; color:var(--paper); font-size:19px; margin:0 0 4px; letter-spacing:.02em;}
+.build-card .build-head .occ-tag{ font-family:var(--font-mono); font-size:11.5px; color:var(--moss-bright); }
+.build-card .build-body{ padding:18px 22px; }
+.build-cols{ display:grid; grid-template-columns:1fr 1fr; gap:0 18px; margin-bottom:16px;}
+.build-cols h4{ font-family:var(--font-mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; margin:0 0 8px; padding-bottom:6px; border-bottom:1px solid var(--line);}
+.build-cols h4.pos{ color:var(--moss-bright); }
+.build-cols h4.neg{ color:var(--rust-bright); }
+.build-cols ul{ list-style:none; margin:0; padding:0; font-size:13.5px; }
+.build-cols li{ display:flex; justify-content:space-between; gap:8px; padding:5px 0; border-bottom:1px dotted var(--line); color:var(--paper-dim);}
+.build-cols li span.n{ font-family:var(--font-mono); font-size:12px; }
+.build-card .build-note{ font-size:13.5px; font-style:italic; color:var(--paper-dim); border-left:2px solid var(--moss); padding-left:12px; }
+
+/* sources / footer */
+footer{ padding:56px; }
+footer .eyebrow{ font-family:var(--font-mono); font-size:12px; letter-spacing:.14em; color:var(--rust-bright); text-transform:uppercase; margin:0 0 14px;}
+footer ul{ padding-left:18px; color:var(--paper-dim); font-size:14px; columns:2; }
+footer ul li{ margin-bottom:8px; break-inside:avoid; }
+footer .fine{ margin-top:28px; font-family:var(--font-mono); font-size:11.5px; color:var(--ink-soft); max-width:700px; }
+
+@media (max-width: 700px){
+  .hero{ padding:64px 24px 40px; }
+  section{ padding:40px 22px; }
+  footer{ padding:40px 22px; }
+  .build-cols{ grid-template-columns:1fr; gap:14px; }
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="wrap">
+
+<nav class="toc" aria-label="Índice">
+  <div class="toc-head">
+    <span class="tag">MANUAL DE CAMPO // KY-93</span>
+    <span class="name">Project<br>Zomboid</span>
+  </div>
+  <ul>
+    <li><a href="#livros">01 · Livros de Habilidade</a></li>
+    <li><a href="#revistas">02 · Revistas de Receitas</a></li>
+    <li><a href="#vhs">03 · Fitas VHS</a></li>
+    <li><a href="#sobrevivencia">04 · Sobrevivência &amp; Progressão</a></li>
+    <li><a href="#mundo">05 · Mundo &amp; Exploração</a></li>
+    <li><a href="#equipamento">06 · Equipamento</a></li>
+    <li><a href="#tracos">07 · Tier List de Traços</a></li>
+    <li><a href="#ocupacoes">08 · Ocupações</a></li>
+    <li><a href="#builds">09 · Builds Prontas</a></li>
+    <li><a href="#fontes">10 · Fontes</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section class="hero" id="topo">
+    <span class="rec"><span class="dot"></span> LIFE AND LIVING TV — SINAL PERDIDO</span>
+    <h1>Guia completo de<br><span>Livros, Revistas</span><br>&amp; Fitas VHS</h1>
+    <p class="subtitle">Organizado por categoria de habilidade — Build 42 (estável)</p>
+    <p class="lede">Compilado a partir de fontes da comunidade (PZwiki e afins). Reúne, por categoria, os 120 livros de habilidade, as revistas de receitas mais conhecidas e as fitas VHS que concedem XP no Project Zomboid — com base no conteúdo vanilla da Build 42.20 (lançada em 29/07/2026).</p>
+    <div class="meta-strip">
+      <div><b>24</b>habilidades cobertas</div>
+      <div><b>120</b>livros de habilidade</div>
+      <div><b>84</b>revistas de receita na build</div>
+      <div><b>22</b>fitas / programas de VHS</div>
+    </div>
+  </section>
+
+  <div class="hazard"></div>
+
+  <section id="livros">
+    <div class="section-head">
+      <p class="eyebrow">01 — Estante de habilidade</p>
+      <h2>Livros de habilidade por categoria</h2>
+      <p class="desc">Cada uma das 24 habilidades possui exatamente 5 livros (Volumes I a V). Cada volume concede um multiplicador de XP <i>apenas dentro da sua faixa de nível</i> — ler o livro fora dessa faixa não tem efeito algum. É preciso avançar de volume conforme a habilidade sobe.</p>
+    </div>
+
+    <table class="xp-table">
+      <thead><tr><th>Volume</th><th>Faixa de nível</th><th>Multiplicador de XP</th></tr></thead>
+      <tbody>
+        <tr><td>I</td><td>Nível 1–2</td><td class="mult">3×</td></tr>
+        <tr><td>II</td><td>Nível 3–4</td><td class="mult">5×</td></tr>
+        <tr><td>III</td><td>Nível 5–6</td><td class="mult">8×</td></tr>
+        <tr><td>IV</td><td>Nível 7–8</td><td class="mult">12×</td></tr>
+        <tr><td>V</td><td>Nível 9–10</td><td class="mult">16×</td></tr>
+      </tbody>
+    </table>
+
+    <div class="expand-controls">
+      <button type="button" onclick="document.querySelectorAll('.skill-card').forEach(d=>d.open=true)">Expandir tudo</button>
+      <button type="button" onclick="document.querySelectorAll('.skill-card').forEach(d=>d.open=false)">Recolher tudo</button>
+    </div>
+
+    <div class="skills-grid">
+        <details class="skill-card" id="skill-agricultura">
+          <summary>
+            <span class="skill-icon">🌱</span>
+            <span class="skill-names"><span class="skill-pt">Agricultura</span><span class="skill-en">Agriculture / Farming</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Better Gardening</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Growing Food at Home</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Liam Keating's Subsistence Farming</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">The Science of Crop Genetics and Yields</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">USDA Guide to Agricultural Output Maximization</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-mira-pontaria">
+          <summary>
+            <span class="skill-icon">🎯</span>
+            <span class="skill-names"><span class="skill-pt">Mira (Pontaria)</span><span class="skill-en">Aiming</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Better Aiming</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Drawing and Shooting</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Leading Moving Targets</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Long Range Sniping Tactics</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">Secrets From the World's Best Snipers</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-cuidado-com-animais">
+          <summary>
+            <span class="skill-icon">🐄</span>
+            <span class="skill-names"><span class="skill-pt">Cuidado com Animais</span><span class="skill-en">Animal Care / Husbandry</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">A Tale of St. Francis</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Animal Welfare Basics</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">How Animals Think: A Helpful Guide</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">The Wants and Needs of Diverse Fauna</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">Wilds Tamed: An In-Depth Comparative</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-ferraria">
+          <summary>
+            <span class="skill-icon">🔨</span>
+            <span class="skill-names"><span class="skill-pt">Ferraria</span><span class="skill-en">Blacksmithing</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Elementary Forge Practice</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">General Purpose Blacksmithing</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Old West Smiths and Their Secrets</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Really Hard Steel Co. Workers Handbook</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">The Complete Encyclopedia of Metallurgy</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-acougue-corte-de-carne">
+          <summary>
+            <span class="skill-icon">🥩</span>
+            <span class="skill-names"><span class="skill-pt">Açougue (Corte de Carne)</span><span class="skill-en">Butchering</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Butchering Basics</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">From Chuck to Shank</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Hunter's Guide to Butchering</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Master Butcher's Complete Guide</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">The Ergonomics of Tools in Meat Cutting Operations</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-carpintaria">
+          <summary>
+            <span class="skill-icon">🪚</span>
+            <span class="skill-names"><span class="skill-pt">Carpintaria</span><span class="skill-en">Carpentry</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">A Guide to Nailing</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Carpentry, Woodcraft Style</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Hand Crafted Shelving and Storage</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Making Your Own Cabin From Scratch</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">Site Joinery and Architectural Carpentry</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-entalhe-talha-em-madeira">
+          <summary>
+            <span class="skill-icon">🪵</span>
+            <span class="skill-names"><span class="skill-pt">Entalhe (Talha em Madeira)</span><span class="skill-en">Carving</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Beginners Carving</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Cool Woodshaping Projects!</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Grinling Gibbons: His Life and Works</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Medieval Wood and Bone Carving Techniques</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">The Art and Process of Natural Material Carving</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-culinária">
+          <summary>
+            <span class="skill-icon">🍳</span>
+            <span class="skill-names"><span class="skill-pt">Culinária</span><span class="skill-en">Cooking</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Better Burger Flipping</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Essential Home Cooking Guide</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Flavorful Cuisine - 1993 Edition</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Professional Tips from a Master Chef</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">Ruban Vert Gourmet - Complete Cooking Techniques</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-eletrica">
+          <summary>
+            <span class="skill-icon">💡</span>
+            <span class="skill-names"><span class="skill-pt">Elétrica</span><span class="skill-en">Electrical</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Basic Electronics</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Kentucky AV Guide '93</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Practical Wiring Guide</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Telecommunications in the 20th Century</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">Understanding Integrated Controls for Electronic Systems</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-primeiros-socorros">
+          <summary>
+            <span class="skill-icon">⛑️</span>
+            <span class="skill-names"><span class="skill-pt">Primeiros Socorros</span><span class="skill-en">First Aid</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">A Scouts Injury Guide</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Bandaging and Suturing</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Emergency Paramedics Manual</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Gray's Anatomy of the Human Body</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">Surgical Techniques of the Operating Room</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-pesca">
+          <summary>
+            <span class="skill-icon">🎣</span>
+            <span class="skill-names"><span class="skill-pt">Pesca</span><span class="skill-en">Fishing</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Dean's Good Fishing Guide</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Fly Fishing, with JR Hartley</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Fresh and Saltwater Fishing</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Latest Rod and Net Techniques</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">The Authoritative Kentucky Fishing Guide</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-forrageamento">
+          <summary>
+            <span class="skill-icon">🍄</span>
+            <span class="skill-names"><span class="skill-pt">Forrageamento</span><span class="skill-en">Foraging</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">A Feast in the Forest</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Dean's Guide to Sticks &amp; Stones</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Finding The Treasure in the Trash</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Survival Foraging: How Nature Can Save Your Life</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">US Park Service Complete Nature Census - Kentucky</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-vidraria">
+          <summary>
+            <span class="skill-icon">🧪</span>
+            <span class="skill-names"><span class="skill-pt">Vidraria</span><span class="skill-en">Glassmaking</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Glass: A History</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">From Sand to Glass: A Journey</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Laboratory Manual of Glassblowing</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Secrets of the Carlow Crystal Makers</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">Venetian Glass: An Electron Microprobe Analysis</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-lascamento-de-pedra-knapping">
+          <summary>
+            <span class="skill-icon">🪨</span>
+            <span class="skill-names"><span class="skill-pt">Lascamento de Pedra (Knapping)</span><span class="skill-en">Knapping</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Flint Knapping 101</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Guide to Kentucky Geology</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Lithic Technology Manual 1993</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Schmidt Rock Hardness Testing Techniques</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">Technological Morphometrics of Clovis Artifacts</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-lamina-longa-espadas">
+          <summary>
+            <span class="skill-icon">🗡️</span>
+            <span class="skill-names"><span class="skill-pt">Lâmina Longa (Espadas)</span><span class="skill-en">Long Blade</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Cool Swords!</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Fencing: A History</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">"Old Sword-Play" (Alfred Hutton)</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">The Zettels of Johannes Liechtenauer</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">Wear Analysis of Selected Medieval Swords</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-manutencao-de-ferramentas">
+          <summary>
+            <span class="skill-icon">🧰</span>
+            <span class="skill-names"><span class="skill-pt">Manutenção (de Ferramentas)</span><span class="skill-en">Maintenance</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Basic Repairs</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Better Tools, Made Easy</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Home Guide to Tool Repairs</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Maintaining High Grade Tools</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">Understanding Biomechanics of Tool Use</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-alvenaria">
+          <summary>
+            <span class="skill-icon">🧱</span>
+            <span class="skill-names"><span class="skill-pt">Alvenaria</span><span class="skill-en">Masonry</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">A Bricklayer's Life</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Flooring: Do It Yourself</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Dibnah's Guide to Bricks</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Secrets of a Professional Mason</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">Statistical Analysis of Historic Masonry Constructions</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-mecanica">
+          <summary>
+            <span class="skill-icon">🔧</span>
+            <span class="skill-names"><span class="skill-pt">Mecânica</span><span class="skill-en">Mechanics</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Carzone's Repair Guide</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">How Vehicle Engines Work</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Laine's Repair Manual '93</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Long Term Vehicle Maintenance</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">Mastering Automotive Fault Diagnosis Techniques</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-ceramica-olaria">
+          <summary>
+            <span class="skill-icon">🏺</span>
+            <span class="skill-names"><span class="skill-pt">Cerâmica (Olaria)</span><span class="skill-en">Pottery</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Ancient Pottery</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Build Your Own Kiln</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Glazing Ceramics at Home</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Ming Chinese Masterworks: A Guide</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">Pyrometamorphic Process of Ceramic Materials</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-recarregamento-de-municao">
+          <summary>
+            <span class="skill-icon">🔫</span>
+            <span class="skill-names"><span class="skill-pt">Recarregamento de Munição</span><span class="skill-en">Reloading</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Basic Reloading</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Dead Man's Click</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Jungle Style Reloading</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Strippers, Speedloaders, and Bolt Action</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">The Ultimate Encyclopedia of Reloading Techniques</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-costura">
+          <summary>
+            <span class="skill-icon">🧵</span>
+            <span class="skill-names"><span class="skill-pt">Costura</span><span class="skill-en">Tailoring</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Basic Clothing Repair</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">From Rags to Royalty: A Sewing Guide</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Haute Couture Tailoring Methods</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Modern Patterns from the Catwalks of Paris</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">Textile Production and Manufacturing Techniques</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-rastreamento">
+          <summary>
+            <span class="skill-icon">🐾</span>
+            <span class="skill-names"><span class="skill-pt">Rastreamento</span><span class="skill-en">Tracking</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Animal Pawprints</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Hunting with Hemingway</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Long Range Animal Tracking</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">The Smell of Ivory: An African Adventure</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">Understanding Animal Behavior Through Spoor Placement</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-armadilhas">
+          <summary>
+            <span class="skill-icon">🪤</span>
+            <span class="skill-names"><span class="skill-pt">Armadilhas</span><span class="skill-en">Trapping</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Basic Pest Control</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Better Trapping, with Dean</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Park Rangers Wildlife Handbook '93</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Research on Rodents and Mammals of Kentucky</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">The Encyclopedia of Applied Animal Psychology</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="skill-card" id="skill-soldagem">
+          <summary>
+            <span class="skill-icon">⚡</span>
+            <span class="skill-names"><span class="skill-pt">Soldagem</span><span class="skill-en">Welding</span></span>
+            <span class="skill-count">5 vols</span>
+          </summary>
+          <table class="vol-table">
+            <thead><tr><th>Vol.</th><th>Faixa</th><th>Título original (inglês)</th></tr></thead>
+            <tbody>
+            <tr>
+              <td class="vol">I</td>
+              <td class="rng">Nível 1-2</td>
+              <td class="title">Basics of Welding</td>
+            </tr>
+            <tr>
+              <td class="vol">II</td>
+              <td class="rng">Nível 3-4</td>
+              <td class="title">Building with Metal</td>
+            </tr>
+            <tr>
+              <td class="vol">III</td>
+              <td class="rng">Nível 5-6</td>
+              <td class="title">Machining Metal: The Mass Genfac Guide</td>
+            </tr>
+            <tr>
+              <td class="vol">IV</td>
+              <td class="rng">Nível 7-8</td>
+              <td class="title">Ore to Sheets: A Complete Metalworking Manual</td>
+            </tr>
+            <tr>
+              <td class="vol">V</td>
+              <td class="rng">Nível 9-10</td>
+              <td class="title">Technological Fundamentals of Metal Fabrication</td>
+            </tr>
+            </tbody>
+          </table>
+        </details>
+    </div>
+  </section>
+
+  <section id="revistas">
+    <div class="section-head">
+      <p class="eyebrow">02 — Crafting especializado</p>
+      <h2>Revistas de receitas</h2>
+      <p class="desc">Diferente dos livros de habilidade, as revistas de receita <i>não aumentam o multiplicador de XP</i>: elas desbloqueiam receitas específicas de crafting (montar um temporizador, usar um gerador, fazer massa de pão). A Build 42 possui <i>84 revistas</i> no total — abaixo, as famílias mais conhecidas por área.</p>
+    </div>
+
+    <div class="mag-groups">
+      <div class="mag-group">
+        <h3>Elétrica / Eletrônica</h3>
+        <ul>
+          <li><b>Electronics Magazine</b> (várias edições) — receitas de eletrônica (temporizadores, sensores de movimento, gatilhos)</li>
+          <li><b>Magazine: Like Clockwork</b> — receitas de eletrônica</li>
+          <li><b>Magazine: How to Use Generators</b> — ensina a usar geradores</li>
+          <li><b>Guerilla Radio Vol. 1–3</b> — rádios de longo alcance (casas de engenheiros / vans de rádio)</li>
+          <li><b>Magazine: Sparky's Lighting Guide</b></li>
+        </ul>
+      </div>
+      <div class="mag-group">
+        <h3>Culinária</h3>
+        <ul>
+          <li><b>Good Cooking Magazine</b> (várias edições) — massas, pães, biscoitos</li>
+          <li><b>Magazine: World Cooking</b></li>
+          <li><b>Angler USA Magazine</b> — receitas para pesca (vara e rede)</li>
+        </ul>
+      </div>
+      <div class="mag-group">
+        <h3>Mecânica / Veículos</h3>
+        <ul>
+          <li><b>Laines Auto Manual</b> — receitas avançadas de mecânica</li>
+        </ul>
+      </div>
+      <div class="mag-group">
+        <h3>Agricultura</h3>
+        <ul>
+          <li><b>The Farming Magazine</b> — sementes, fertilizantes, cultivo</li>
+        </ul>
+      </div>
+      <div class="mag-group">
+        <h3>Forrageamento / Medicina Natural</h3>
+        <ul>
+          <li><b>The Herbalist</b> — ervas medicinais e remédios naturais</li>
+        </ul>
+      </div>
+      <div class="mag-group">
+        <h3>Armadilhas / Rastreamento</h3>
+        <ul>
+          <li><b>The Hunter Magazine</b></li>
+          <li><b>Magazine: Small Game Hunting</b></li>
+          <li><b>Magazine: Wildlife Preserve</b></li>
+          <li><b>Magazine: Get Stuffed</b></li>
+        </ul>
+      </div>
+      <div class="mag-group">
+        <h3>Ferraria / Soldagem / Metalurgia</h3>
+        <ul>
+          <li><b>The Metalworker</b> (série) — receitas de metalurgia e ferraria</li>
+        </ul>
+      </div>
+      <div class="mag-group">
+        <h3>Lascamento de Pedra (Knapping)</h3>
+        <ul>
+          <li><b>Magazine: Tool Use of Early Man</b></li>
+          <li><b>Magazine: Cultures of Prehistory</b></li>
+          <li><b>Magazine: Wilderness Survival</b></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="vhs" class="vhs-section">
+    <div class="section-head">
+      <p class="eyebrow">03 — Sinal gravado</p>
+      <h2>Fitas VHS</h2>
+      <p class="desc">São versões gravadas dos programas do canal <i>"Life and Living TV"</i>, que vai ao ar apenas nos primeiros dias de jogo. Depois que a transmissão acaba, é preciso encontrar as fitas em lojas de vídeo ("Hit Vids"), casas e outros contêineres para assistir aos mesmos programas e ganhar XP — uma única vez por fita, por personagem. É necessária uma TV funcionando para reproduzi-las.</p>
+    </div>
+
+    <div class="tv-frame">
+      <table class="vhs-table">
+        <thead><tr><th>Título da fita</th><th>Habilidade relacionada</th></tr></thead>
+        <tbody>
+          <tr><td class="tape-title">The Cook Show (Ep. 1–7)</td><td>Culinária</td></tr>
+          <tr><td class="tape-title">Woodcraft (Ep. 1–7)</td><td>Carpintaria</td></tr>
+          <tr><td class="tape-title">OSCC '92</td><td>Mecânica</td></tr>
+          <tr><td class="tape-title">Stock Cars</td><td>Mecânica</td></tr>
+          <tr><td class="tape-title">Carzone (Ep. 1–3)</td><td>Mecânica</td></tr>
+          <tr><td class="tape-title">Exposure Survival (Ep. 1–2)</td><td>Pesca</td></tr>
+          <tr><td class="tape-title">Exposure Survival (Ep. 3)</td><td>Agricultura</td></tr>
+          <tr><td class="tape-title">Exposure Survival (Ep. 4)</td><td>Carpintaria</td></tr>
+          <tr><td class="tape-title">Exposure Survival (Ep. 5)</td><td>Carpintaria e Forrageamento</td></tr>
+          <tr><td class="tape-title">Exposure Survival (Ep. 6)</td><td>Armadilhas</td></tr>
+          <tr><td class="tape-title">Exposure Survival (Ep. 7)</td><td>Forrageamento</td></tr>
+          <tr><td class="tape-title">Exposure Survival (Ep. 8)</td><td>Carpintaria</td></tr>
+          <tr><td class="tape-title">Granny Nani</td><td>Costura</td></tr>
+          <tr><td class="tape-title">TV Repair</td><td>Elétrica</td></tr>
+          <tr><td class="tape-title">Muldraugh AV Club</td><td>Elétrica</td></tr>
+          <tr><td class="tape-title">RMFA</td><td>Primeiros Socorros</td></tr>
+          <tr><td class="tape-title">Tailoring 101</td><td>Costura</td></tr>
+          <tr><td class="tape-title">Tree Planting Guide</td><td>Agricultura</td></tr>
+          <tr><td class="tape-title">Basic Gun Handling (Officer Use Only)</td><td>Mira e Recarregamento</td></tr>
+          <tr><td class="tape-title">Z-Squad S2.03</td><td>Mecânica e Ferraria/Soldagem</td></tr>
+          <tr><td class="tape-title">Dead Wrong</td><td>Mira e Recarregamento</td></tr>
+          <tr><td class="tape-title">Mother's Boy</td><td>Lâmina Curta</td></tr>
+          <tr><td class="tape-title">Knapping: The Ancient Art</td><td>Lascamento de Pedra</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tip-box">💡 DICA — Leia o livro de habilidade correspondente antes de assistir à fita: o multiplicador de XP do livro também se aplica ao XP ganho pela fita / programa de TV.</p>
+  </section>
+
+  <section id="sobrevivencia">
+    <div class="section-head">
+      <p class="eyebrow">04 — Corpo, mente e mantimento</p>
+      <h2>Sobrevivência e progressão</h2>
+      <p class="desc">Além dos livros e das habilidades de crafting, a Build 42 aprofundou o quanto o <i>estado do seu personagem</i> importa: moodles (humor/estado), condicionamento físico, agricultura sazonal e doenças agora exigem atenção constante — ignorar os avisos é uma das formas mais comuns de morrer sem nem ver um zumbi.</p>
+    </div>
+
+    <div class="subhead">Moodles — lendo os avisos do seu personagem</div>
+    <p class="desc" style="margin-bottom:16px;">Moodles são os ícones no canto da tela que mostram o estado físico e mental do sobrevivente. Build 42.20 reorganizou e expandiu essa lista — o essencial é tratar os avermelhados antes de entrar em combate.</p>
+    <div class="mag-groups">
+      <div class="mag-group">
+        <h3>Físicos / Sobrevivência</h3>
+        <ul>
+          <li><b>Cansado / Exaustão</b> — reduz stamina e velocidade de ataque; descanse antes de lutar.</li>
+          <li><b>Fome e Sede</b> — afetam saúde a longo prazo; mantenha estoque de água e comida.</li>
+          <li><b>Carga Pesada</b> — inventário além do limite reduz velocidade e stamina.</li>
+          <li><b>Movimento Restrito</b> — roupas ou equipamento volumoso atrapalham corridas e escaladas.</li>
+        </ul>
+      </div>
+      <div class="mag-group">
+        <h3>Mentais</h3>
+        <ul>
+          <li><b>Pânico</b> — surge perto de zumbis; atrapalha pontaria e ações. Reduz saindo da linha de visão ou com Beta Blockers.</li>
+          <li><b>Estresse</b> — sobe com medo, sangue (Hemofobia) ou abstinência de cigarro; alivia com leitura, TV ou cigarro.</li>
+          <li><b>Tédio</b> — aparece após tempo parado sem estímulo; se ignorado, vira Infelicidade.</li>
+          <li><b>Infelicidade</b> — 4 níveis (Triste → Choroso → Miserável → Sem Esperança); tratada com comida boa, literatura e atividades — não é um "-50% em tudo", mas piora o bem-estar geral.</li>
+        </ul>
+      </div>
+      <div class="mag-group">
+        <h3>Ferimentos e Doença</h3>
+        <ul>
+          <li><b>Sangramento</b> — cada parte sangrando atrai zumbis e drena vida; enfaixe imediatamente.</li>
+          <li><b>Dor</b> — trate ferimentos primeiro; dor alta (Agonia) não deve ser "levada na coragem".</li>
+          <li><b>Doente</b> — escala em 4 estágios (Enjoado → Nauseado → Doente → Febre); a causa pode ser infecção Knox, comida estragada, cheiro de cadáver ou resfriado — cada uma exige um tratamento diferente (veja tabela abaixo).</li>
+        </ul>
+      </div>
+      <div class="mag-group">
+        <h3>Ambientais</h3>
+        <ul>
+          <li><b>Molhado</b> — favorece resfriados; troque de roupa e se seque perto do fogo.</li>
+          <li><b>Hipotermia / Hipertermia</b> — frio e calor extremos; regule roupas por camada e sombra/aquecimento.</li>
+          <li><b>Desconforto</b> — acúmulo de roupas pesadas, sono ruim ou calor/frio; reduz conforto geral e pode alimentar o Estresse.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="subhead">Fitness &amp; Força — o treino mais lento do jogo</div>
+    <p class="desc" style="margin-bottom:16px;">Diferente das habilidades de crafting, Fitness e Força não têm livros de habilidade nem se beneficiam do traço Aprendiz Rápido — a evolução é deliberadamente lenta. O treino é feito pelo painel de Saúde (tecla H) → Exercícios.</p>
+    <table class="xp-table" style="max-width:100%;">
+      <thead><tr><th>Exercício</th><th>Habilidade treinada</th><th>Observação</th></tr></thead>
+      <tbody>
+        <tr><td>Agachamentos / Abdominais</td><td class="mult">Fitness</td><td>Sem equipamento; XP mais lento de ganhar dos dois.</td></tr>
+        <tr><td>Flexões / Levantamento com peso</td><td class="mult">Força</td><td>Halteres e barras dão o maior XP por repetição.</td></tr>
+        <tr><td>Burpees</td><td class="mult">Fitness + Força</td><td>Treina os dois ao mesmo tempo, com esforço maior.</td></tr>
+      </tbody>
+    </table>
+    <p class="tip-box">🍖 Uma dieta rica em proteína (entre 50–300 no medidor) multiplica o XP de <b>Força</b> em até 1,5× — não afeta o ganho de Fitness. Treine em cômodo seguro e trancado: ser interrompido no meio do treino é uma forma clássica de morrer.</p>
+
+    <div class="subhead">Agricultura por estação</div>
+    <p class="desc" style="margin-bottom:16px;">A Build 42 tornou a Agricultura sazonal: cada cultivo tem uma janela de plantio (meses "bons" e "de risco"); plantar fora da estação pode amaldiçoar a plantação (murchar/morrer). Regue no nível certo, remova pragas cedo e use composto com moderação — a primeira aplicação de fertilizante ajuda, doses extras podem prejudicar.</p>
+    <table class="xp-table" style="max-width:100%;">
+      <thead><tr><th>Situação</th><th>O que plantar / fazer</th></tr></thead>
+      <tbody>
+        <tr><td>Início de partida (julho, evento Knox)</td><td class="mult">Rabanete, alface, couve, brócolis, nabo, batata-doce, tabaco e alho — únicas culturas viáveis nesse mês</td></tr>
+        <tr><td>Inverno (dezembro–fevereiro)</td><td class="mult">Amaldiçoa a maioria das plantas ao ar livre no 1º dia, exceto as resistentes ao frio</td></tr>
+        <tr><td>Grãos (cevada, trigo, centeio, lúpulo, cânhamo)</td><td class="mult">Ciclos longos, plantio tardio (ago–out) — planeje armazenamento antes do inverno</td></tr>
+      </tbody>
+    </table>
+
+    <div class="subhead">Doenças e infecções — qual é a causa?</div>
+    <p class="desc" style="margin-bottom:16px;">"Doente" é uma categoria, não uma doença única. Diagnosticar a causa certa evita desperdiçar recursos tratando o problema errado.</p>
+    <div class="table-scroll">
+    <table class="trait-table">
+      <thead><tr><th>Causa</th><th>Sinal recente</th><th>Tratamento</th></tr></thead>
+      <tbody>
+        <tr><td class="trait-name">Infecção Knox (mordida/arranhão de zumbi)</td><td>Ferida de zumbi nas últimas 24h</td><td>Sem cura na configuração padrão — mortal.</td></tr>
+        <tr><td class="trait-name">Resfriado / gripe</td><td>Exposição a frio e umidade</td><td>Malva (Common Mallow), repouso e roupa seca.</td></tr>
+        <tr><td class="trait-name">Intoxicação alimentar</td><td>Comida crua, estragada ou mal cozida</td><td>Repouso, hidratação; evite comer cru.</td></tr>
+        <tr><td class="trait-name">Cheiro de cadáver</td><td>Muito tempo perto de corpos amontoados</td><td>Queime ou remova os corpos da área.</td></tr>
+        <tr><td class="trait-name">Ferimento infeccionado (comum)</td><td>Corte/laceração sem tratar</td><td>Antibióticos e curativos limpos.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <section id="mundo">
+    <div class="section-head">
+      <p class="eyebrow">05 — Knox Country</p>
+      <h2>Mundo e exploração</h2>
+      <p class="desc">O mapa do Project Zomboid — Knox Country — é todo desenhado à mão, sem geração procedural: todo servidor e toda partida usam o mesmo layout. A Build 42 expandiu o mapa para oeste com cidades novas e adicionou porões gerados sob vários edifícios e prédios altos em Louisville.</p>
+    </div>
+
+    <div class="table-scroll">
+    <table class="occ-table">
+      <thead><tr><th>Cidade</th><th>Perfil</th><th>Densidade de zumbis</th><th>Destaques</th></tr></thead>
+      <tbody>
+        <tr><td class="occ-name">Rosewood</td><td>Pequena, tranquila, ótima para iniciantes</td><td class="occ-pts">Baixa</td><td>Posto policial com heliporto (novo na B42), mercado, livraria, posto de saúde, oficina e corpo de bombeiros.</td></tr>
+        <tr><td class="occ-name">Riverside</td><td>Residencial, à beira do rio Ohio</td><td class="occ-pts">Baixa/moderada</td><td>Pesca constante, condomínio fechado para base segura, mercado e farmácia.</td></tr>
+        <tr><td class="occ-name">Muldraugh</td><td>Cidade clássica, corredor central</td><td class="occ-pts">Alta</td><td>Maior variedade de saques, posto policial grande, loja de armas e excedente militar.</td></tr>
+        <tr><td class="occ-name">West Point</td><td>Central, porta de entrada para Louisville</td><td class="occ-pts">Muito alta</td><td>GigaMart, loja de armas, farmácia — recompensa alta para quem já tem experiência.</td></tr>
+        <tr><td class="occ-name">Louisville</td><td>Grande cidade no extremo nordeste, cercada por muro militar</td><td class="occ-pts">Extrema</td><td>Shopping, lojas de armas e o loot de fim de jogo — não é ponto de partida, só destino.</td></tr>
+        <tr><td class="occ-name">Brandenburg / Ekron / Irvington</td><td>Cidades novas da Build 42, expansão a oeste</td><td class="occ-pts">Alta (Brandenburg ≈ West Point)</td><td>Posto policial, escola e ferragista enormes; disponíveis via Sandbox customizado.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="tip-box">🗺️ Louisville não é uma opção de spawn no menu padrão — é um destino a ser alcançado depois de preparado. Já as cidades novas (Brandenburg, Ekron, Irvington, March Ridge, etc.) só aparecem como ponto de partida no modo Sandbox customizado.</p>
+  </section>
+
+  <section id="equipamento">
+    <div class="section-head">
+      <p class="eyebrow">06 — Armamento &amp; logística</p>
+      <h2>Equipamento</h2>
+      <p class="desc">Guia rápido de armas corpo a corpo, armas de fogo e veículos — o essencial para decidir o que carregar e por quê.</p>
+    </div>
+
+    <div class="subhead">Armas corpo a corpo</div>
+    <div class="gear-grid">
+      <div class="gear-card">
+        <span class="gear-tag">Renovável</span>
+        <h4>Lança (Spear)</h4>
+        <p>Craftável com galho/tábua + lâmina, dá alcance e mantém distância dos zumbis. Baixa durabilidade na versão de madeira; combinações com facas duram mais.</p>
+      </div>
+      <div class="gear-card">
+        <span class="gear-tag">Dano bruto</span>
+        <h4>Machado (Axe)</h4>
+        <p>Maior dano por golpe entre as armas comuns, com chance alta de crítico — também serve para cortar árvores e arrombar portas. Cansa rápido e é ruidoso.</p>
+      </div>
+      <div class="gear-card moss">
+        <span class="gear-tag">Rápida</span>
+        <h4>Facão (Machete)</h4>
+        <p>Lâmina longa com bom dano e ataque mais rápido que o machado — não trava no alvo. Ótima para grupos pequenos, mas mais rara de achar.</p>
+      </div>
+      <div class="gear-card moss">
+        <span class="gear-tag">Durabilidade</span>
+        <h4>Pé de Cabra (Crowbar)</h4>
+        <p>Dano modesto, mas é a arma corpo a corpo mais durável do jogo — ótima reserva enquanto sua arma principal quebra ou está sendo consertada.</p>
+      </div>
+      <div class="gear-card amber">
+        <span class="gear-tag">Clássica</span>
+        <h4>Taco de Beisebol (Bat)</h4>
+        <p>Chance de crítico alta e bom alcance; dano por golpe é baixo, mas empurra o zumbi para trás — perdoa erros de novato. Item comum.</p>
+      </div>
+    </div>
+
+    <div class="subhead">Armas de fogo</div>
+    <div class="table-scroll">
+    <table class="trait-table">
+      <thead><tr><th>Categoria</th><th>Munição</th><th>Ruído</th><th>Uso recomendado</th></tr></thead>
+      <tbody>
+        <tr><td class="trait-name">Pistolas (M9, M1911, revólveres)</td><td>9mm / .45 / .38</td><td>Moderado</td><td>Portáteis, boas para limpeza interna e como reserva — pouco eficazes com Mira baixa.</td></tr>
+        <tr><td class="trait-name">Espingardas (JS-2000 e outras)</td><td>Cartuchos (múltiplos projéteis)</td><td>Alto</td><td>Excelentes na defesa de curta distância contra vários zumbis ao mesmo tempo.</td></tr>
+        <tr><td class="trait-name">Rifles (.308 / 5.56)</td><td>.308 / 5.56mm</td><td>Muito alto</td><td>Alcance e dano altos para campo aberto; péssimos em ambientes fechados por causa do ruído.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="tip-box">🔫 Toda arma de fogo é alta o bastante para atrair zumbis de longe — trate-as como ferramenta de emergência, não como opção do dia a dia. A Build 42 ampliou a família de armas (JS-14, L92, MSR-70, Trapper Carbine e outras) — confira os saques em lojas de armas, delegacias e bases militares.</p>
+
+    <div class="subhead">Veículos</div>
+    <p class="desc" style="margin-bottom:16px;">Um carro funcional muda o jogo: transforma looting a pé em corridas rápidas e serve como baú móvel. Os pontos essenciais:</p>
+    <div class="gear-grid">
+      <div class="gear-card amber">
+        <span class="gear-tag">Partida</span>
+        <h4>Chave ou Ligação Direta</h4>
+        <p>Cada chave funciona só no seu veículo. Sem chave, dá para ligar direto com Eletricista — carros em bom estado são, na verdade, mais difíceis de ligar direto.</p>
+      </div>
+      <div class="gear-card amber">
+        <span class="gear-tag">Combustível</span>
+        <h4>Sifão &amp; Postos</h4>
+        <p>Postos de gasolina param de funcionar quando a energia cai — depois disso, sifonar combustível de outros carros parados vira a única fonte confiável.</p>
+      </div>
+      <div class="gear-card amber">
+        <span class="gear-tag">Manutenção</span>
+        <h4>Habilidade de Mecânica</h4>
+        <p>Determina o sucesso ao diagnosticar, remontar e trocar peças. Pratique em carros descartáveis antes de arriscar seu veículo principal.</p>
+      </div>
+      <div class="gear-card amber">
+        <span class="gear-tag">Novidade B42</span>
+        <h4>Vans de Trabalho</h4>
+        <p>Vans e caminhonetes de empresas (ferreiro, floricultura etc.) agora vêm carregadas com o material da própria profissão — vale abrir qualquer van "estranha" que encontrar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tracos">
+    <div class="section-head">
+      <p class="eyebrow">07 — Criação de personagem</p>
+      <h2>Melhores traços — tier list (Build 42.20)</h2>
+      <p class="desc">Os traços positivos custam pontos e os negativos devolvem pontos; o total precisa fechar em zero ou mais para começar a partida. Classificação baseada no consenso de guias da comunidade para a Build 42.20 (estável) — pode mudar em patches futuros. <i>Sempre confira os custos atuais na tela de criação de personagem.</i></p>
+    </div>
+
+    <div class="tier-row">
+      <div class="tier-label"><span class="tier-badge S">S</span><span class="tier-caption">Leve em quase toda build</span></div>
+      <div class="table-scroll">
+      <table class="trait-table">
+        <thead><tr><th>Traço</th><th>Pontos</th><th>Por que vale a pena</th></tr></thead>
+        <tbody>
+          <tr><td class="trait-name">Organizado</td><td class="pts neg">-6</td><td>Mais capacidade de contêineres (mochilas, carros, baús) desde o início. É o positivo mais consistente do jogo.</td></tr>
+          <tr><td class="trait-name">Robusto (Stout)</td><td class="pts neg">-6</td><td>Mais peso carregável e força de empurrão. Versão custo-benefício do Forte (Strong, -10).</td></tr>
+          <tr><td class="trait-name">Corajoso (Brave)</td><td class="pts neg">-4</td><td>Reduz o pânico, o que estabiliza o ritmo dos ataques em combate.</td></tr>
+          <tr><td class="trait-name">Olhos de Gato (Cat's Eyes)</td><td class="pts neg">-3</td><td>Visão noturna barata — praticamente sempre vale a pena.</td></tr>
+          <tr><td class="trait-name">Aprendiz Rápido (Fast Learner)</td><td class="pts neg">-6</td><td>130% de XP em quase tudo. Efeito composto durante toda a partida.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="tier-row">
+      <div class="tier-label"><span class="tier-badge A">A</span><span class="tier-caption">Fortes ou decisivos para a build</span></div>
+      <div class="table-scroll">
+      <table class="trait-table">
+        <thead><tr><th>Traço</th><th>Pontos</th><th>Por que vale a pena</th></tr></thead>
+        <tbody>
+          <tr><td class="trait-name">Em Forma (Fit)</td><td class="pts neg">-6</td><td>+2 Fitness — resistência para combate e fuga; irmã mais barata de Atlético (-10).</td></tr>
+          <tr><td class="trait-name">Boa Audição (Keen Hearing)</td><td class="pts neg">-6</td><td>Detecta zumbis fora do campo de visão; evita ataques surpresa por trás.</td></tr>
+          <tr><td class="trait-name">Discreto (Inconspicuous)</td><td class="pts neg">-4</td><td>Reduz o raio de detecção ao andar — ótimo para forrageadores e saqueadores.</td></tr>
+          <tr><td class="trait-name">Gracioso (Graceful)</td><td class="pts neg">-4</td><td>Menos ruído ao se mover; combina com builds furtivas.</td></tr>
+          <tr><td class="trait-name">Pouca Sede (Low Thirst)</td><td class="pts neg">-6</td><td>Uma preocupação de sobrevivência a menos por dia.</td></tr>
+          <tr><td class="trait-name">Habilidoso (Handy)</td><td class="pts neg">-8</td><td>+1 Carpintaria/Manutenção e construção mais rápida — essencial para quem constrói base.</td></tr>
+          <tr><td class="trait-name">Sobrevivencialista (Bushcrafter)</td><td class="pts neg">-8</td><td>Pacote completo de vida selvagem: entalhe, forrageamento, remédios naturais e fogo.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="tier-row">
+      <div class="tier-label"><span class="tier-badge B">B</span><span class="tier-caption">Bons quando encaixam na build</span></div>
+      <div class="table-scroll">
+      <table class="trait-table">
+        <thead><tr><th>Traço</th><th>Pontos</th><th>Por que vale a pena</th></tr></thead>
+        <tbody>
+          <tr><td class="trait-name">Ágil com as Mãos (Dextrous)</td><td class="pts neg">-2</td><td>Transferências de itens mais rápidas; combina bem com Organizado.</td></tr>
+          <tr><td class="trait-name">Notívago (Night Owl)</td><td class="pts neg">-2</td><td>Bônus à noite; só compensa se você jogar de propósito no período noturno.</td></tr>
+          <tr><td class="trait-name">Aventureiro (Outdoorsman)</td><td class="pts neg">-2</td><td>Mais conforto térmico — ajuda muito no inverno.</td></tr>
+          <tr><td class="trait-name">Olho de Águia (Eagle Eyed)</td><td class="pts neg">-4</td><td>Mais alcance de zoom; conveniência, não é essencial.</td></tr>
+          <tr><td class="trait-name">Come Pouco (Light Eater)</td><td class="pts neg">-4</td><td>Menos pressão de fome; a agricultura torna isso menos necessário.</td></tr>
+          <tr><td class="trait-name">Engenhoso (Crafty)</td><td class="pts neg">-3</td><td>130% de XP de crafting — só compensa em builds focadas em produção.</td></tr>
+          <tr><td class="trait-name">Conhecimento de Ferreiro</td><td class="pts neg">-6</td><td>Dá o pontapé inicial em Ferraria — só vale em build focada em forja.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="tier-row">
+      <div class="tier-label"><span class="tier-badge free">$</span><span class="tier-caption">Negativos — "pontos de graça" (fáceis de administrar)</span></div>
+      <div class="table-scroll">
+      <table class="trait-table">
+        <thead><tr><th>Traço</th><th>Pontos</th><th>Por que vale a pena</th></tr></thead>
+        <tbody>
+          <tr><td class="trait-name">Fumante (Smoker)</td><td class="pts pos">+4</td><td>Pontos de graça se você estocar cigarros; incômodo leve.</td></tr>
+          <tr><td class="trait-name">Leitor Lento (Slow Reader)</td><td class="pts pos">+2</td><td>Barato — a leitura já pausa o personagem em local seguro.</td></tr>
+          <tr><td class="trait-name">Desajeitado (All Thumbs)</td><td class="pts pos">+2</td><td>Transferências um pouco mais lentas; impacto pequeno.</td></tr>
+          <tr><td class="trait-name">Curto de Vista (Short Sighted)</td><td class="pts pos">+2</td><td>Zoom reduzido; pouco impacto para a maioria dos estilos de jogo.</td></tr>
+          <tr><td class="trait-name">Propenso a Doenças</td><td class="pts pos">+4</td><td>Gerenciável se você comer bem e se manter aquecido.</td></tr>
+          <tr><td class="trait-name">Estômago Fraco (Weak Stomach)</td><td class="pts pos">+3</td><td>Só afeta se você comer comida estragada — controle total do jogador.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="tier-row">
+      <div class="tier-label"><span class="tier-badge trap">⚠</span><span class="tier-caption">Negativos — "armadilhas" (evite, a menos que a build exija)</span></div>
+      <div class="table-scroll">
+      <table class="trait-table">
+        <thead><tr><th>Traço</th><th>Pontos</th><th>Por que vale a pena</th></tr></thead>
+        <tbody>
+          <tr><td class="trait-name">Pele Fina (Thin Skinned)</td><td class="pts pos">+8</td><td>Cada golpe fica mais perigoso — consenso da comunidade: não compensa.</td></tr>
+          <tr><td class="trait-name">Surdo (Deaf)</td><td class="pts pos">+12</td><td>Você perde o aviso sonoro que mantém você vivo — a pior troca do jogo.</td></tr>
+          <tr><td class="trait-name">Abaixo/Acima do Peso/Obeso</td><td class="pts pos">+6/+6/+10</td><td>Cria um sistema extra inteiro de gerenciamento de peso.</td></tr>
+          <tr><td class="trait-name">Muita Sede (High Thirst)</td><td class="pts pos">+6</td><td>Caça constante por água; péssima combinação com corte de água/energia.</td></tr>
+          <tr><td class="trait-name">Chamativo (Conspicuous)</td><td class="pts pos">+4</td><td>Atrai mais zumbis — o oposto de Discreto.</td></tr>
+          <tr><td class="trait-name">Covarde (Cowardly)</td><td class="pts pos">+2</td><td>Pânico em quase todo combate — o oposto de Corajoso.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="ocupacoes">
+    <div class="section-head">
+      <p class="eyebrow">08 — Ponto de partida</p>
+      <h2>Melhores ocupações (Build 42.20)</h2>
+      <p class="desc">A atualização 42.16 reformulou várias ocupações e introduziu seis novas, construídas em torno das habilidades de crafting adicionadas na Build 42.</p>
+    </div>
+
+    <div class="occ-subhead">Novas ocupações (Build 42.16+)</div>
+    <div class="table-scroll">
+    <table class="occ-table">
+      <thead><tr><th>Ocupação</th><th>Pontos</th><th>Bônus inicial</th><th>Por que escolher</th></tr></thead>
+      <tbody>
+        <tr><td class="occ-name">Ferreiro (Blacksmith)</td><td class="occ-pts">-6</td><td>+4 Ferraria, +1 Manutenção, +1 Concussão Curta + traço "Conhecimento de Ferreiro" (+2 Ferraria, +1 Manutenção)</td><td>Investimento caro, mas coloca o personagem em nível ~6 de Ferraria de cara — pula semanas de procura por revistas.</td></tr>
+        <tr><td class="occ-name">Soldador (Welder)</td><td class="occ-pts">-4</td><td>+4 Soldagem</td><td>Permite barricadas e contêineres de metal desde o dia 1; também ajuda a desmontar carros destruídos.</td></tr>
+        <tr><td class="occ-name">Alfaiate (Tailor)</td><td class="occ-pts">+2</td><td>+4 Costura</td><td>"Dinheiro de graça": ganha pontos e ainda começa com Costura 4, uma habilidade de produção genuína na Build 42.</td></tr>
+        <tr><td class="occ-name">Fazendeiro de Gado (Rancher)</td><td class="occ-pts">0</td><td>+4 Cuidado com Animais, +3 Açougue, +1 Fitness</td><td>Perfeito para quem quer viver de gado (leite, lã, ovos, carne, couro) desde o início.</td></tr>
+        <tr><td class="occ-name">Chapeiro (Burger Flipper)</td><td class="occ-pts">+2</td><td>+2 Culinária, +1 Manutenção, +1 Lâmina Curta + traço Keen Cook</td><td>Opção econômica de cozinha — cobre o básico da culinária enquanto financia outros traços.</td></tr>
+        <tr><td class="occ-name">Operário de Construção</td><td class="occ-pts">-2</td><td>+2 Alvenaria, +2 Concussão Curta, +1 Carpintaria, +1 Concussão Longa, +1 Manutenção</td><td>Remove a parte mais chata da progressão de Alvenaria, essencial para paredes e fornos de pedra.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="occ-subhead">Ocupações clássicas que continuam valendo a pena</div>
+    <div class="table-scroll">
+    <table class="occ-table">
+      <thead><tr><th>Ocupação</th><th>Pontos</th><th>Bônus inicial</th><th>Por que escolher</th></tr></thead>
+      <tbody>
+        <tr><td class="occ-name">Chef</td><td class="occ-pts">clássica</td><td>+4 Culinária, +2 Açougue</td><td>Ainda a escolha mais forte para uma cozinha totalmente funcional.</td></tr>
+        <tr><td class="occ-name">Eletricista</td><td class="occ-pts">-2</td><td>+5 Elétrica — pode operar geradores</td><td>Fundamental para quem quer energia funcionando rápido; decide o plano do corte de energia.</td></tr>
+        <tr><td class="occ-name">Engenheiro</td><td class="occ-pts">-4</td><td>+1 Carpintaria/Elétrica/Alvenaria — armadilhas e explosivos</td><td>Versátil para quem quer diversificar entre construção, eletrônica e defesa.</td></tr>
+        <tr><td class="occ-name">Guarda Florestal (Park Ranger)</td><td class="occ-pts">mochileiro</td><td>+1 Primeiros Socorros/Forrageamento/Lascamento de Pedra/Entalhe/Armadilhas</td><td>A melhor escolha para quem quer viver da terra, longe das cidades.</td></tr>
+        <tr><td class="occ-name">Guia de Pesca</td><td class="occ-pts">-2</td><td>+3 Pesca, +1 Açougue, +1 Forrageamento</td><td>Ótima base alimentar para quem se instala perto de rios e lagos.</td></tr>
+        <tr><td class="occ-name">Médico (Doctor)</td><td class="occ-pts">0</td><td>+6 Primeiros Socorros</td><td>De graça em pontos — praticamente obrigatório se você planeja socorrer outros jogadores.</td></tr>
+        <tr><td class="occ-name">Policial</td><td class="occ-pts">-4</td><td>+4 Mira, +1 Recarregamento</td><td>Melhor início para quem quer focar em armas de fogo desde cedo.</td></tr>
+        <tr><td class="occ-name">Customizado (Custom)</td><td class="occ-pts">+8</td><td>8 pontos livres, sem bônus inicial</td><td>Máxima flexibilidade de traços, mas começa sem nenhuma vantagem de habilidade.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="tip-box">⚡ Eletricista, Engenheiro ou a revista "How to Use Generators" são necessários para operar geradores — a escolha de ocupação decide indiretamente o seu plano para o corte de energia.</p>
+  </section>
+
+  <section id="builds">
+    <div class="section-head">
+      <p class="eyebrow">09 — Prontas para copiar</p>
+      <h2>Builds prontas (ocupação + traços)</h2>
+      <p class="desc">Combinações completas e testadas pela comunidade, prontas para copiar na tela de criação de personagem. Os valores em pontos podem variar ligeiramente conforme patches futuros da Build 42 — use como referência e ajuste no orçamento de pontos do jogo.</p>
+    </div>
+
+    <div class="builds-grid">
+
+      <div class="build-card">
+        <div class="build-head"><h3>Carpinteiro Clássico</h3><span class="occ-tag">Ocupação sugerida: Carpinteiro (ou nenhuma)</span></div>
+        <div class="build-body">
+          <div class="build-cols">
+            <div><h4 class="pos">Positivos</h4><ul>
+              <li>Organizado <span class="n">4</span></li>
+              <li>Engenhoso (Crafty) <span class="n">3</span></li>
+              <li>Entalhador (Whittler) <span class="n">2</span></li>
+            </ul></div>
+            <div><h4 class="neg">Negativos</h4><ul>
+              <li>Propenso a Doenças <span class="n">4</span></li>
+              <li>Curador Lento (Slow Healer) <span class="n">3</span></li>
+              <li>Muita Sede <span class="n">2</span></li>
+              <li>Estômago Fraco <span class="n">2</span></li>
+            </ul></div>
+          </div>
+          <p class="build-note">Build clássica e segura para quem quer construir e reformar bases. Organizado resolve o problema de carregar toras e tábuas; Engenhoso acelera o ganho de XP de crafting; Entalhador dá um empurrão enorme em Entalhe, habilidade lenta de subir.</p>
+        </div>
+      </div>
+
+      <div class="build-card">
+        <div class="build-head"><h3>Guarda Florestal (Vida Selvagem)</h3><span class="occ-tag">Ocupação sugerida: Guarda Florestal (Park Ranger)</span></div>
+        <div class="build-body">
+          <div class="build-cols">
+            <div><h4 class="pos">Positivos</h4><ul>
+              <li>Ex-Escoteiro (Former Scout) <span class="n">6</span></li>
+              <li>Caminhante (Hiker) <span class="n">5</span></li>
+              <li>Jardineiro (Gardener) <span class="n">2</span></li>
+            </ul></div>
+            <div><h4 class="neg">Negativos</h4><ul>
+              <li>Propenso a Doenças <span class="n">4</span></li>
+              <li>Curador Lento <span class="n">3</span></li>
+              <li>Covarde <span class="n">2</span></li>
+              <li>Estômago Fraco <span class="n">2</span></li>
+              <li>Motorista de Domingo <span class="n">1</span></li>
+            </ul></div>
+          </div>
+          <p class="build-note">Voltada para quem quer viver isolado na floresta. Ex-Escoteiro dá bônus em Pesca, Forrageamento e Primeiros Socorros; Caminhante melhora Forrageamento e Armadilhas. Covarde é seguro aqui porque você evita combate na maior parte do tempo. Dica: troque Jardineiro por Pouca Sede ou Come Pouco se preferir.</p>
+        </div>
+      </div>
+
+      <div class="build-card">
+        <div class="build-head"><h3>Assaltante (Saque Rápido)</h3><span class="occ-tag">Ocupação sugerida: Ladrão (Burglar)</span></div>
+        <div class="build-body">
+          <div class="build-cols">
+            <div><h4 class="pos">Positivos</h4><ul>
+              <li>Discreto <span class="n">4</span></li>
+              <li>Gracioso <span class="n">4</span></li>
+              <li>Vigilante (Wakeful) <span class="n">3</span></li>
+              <li>Ágil com as Mãos <span class="n">2</span></li>
+              <li>Demônio da Velocidade <span class="n">1</span></li>
+            </ul></div>
+            <div><h4 class="neg">Negativos</h4><ul>
+              <li>Propenso a Doenças <span class="n">4</span></li>
+              <li>Curador Lento <span class="n">3</span></li>
+              <li>Estômago Fraco <span class="n">2</span></li>
+              <li>Leitor Lento <span class="n">2</span></li>
+              <li>Lutador Relutante <span class="n">5</span></li>
+              <li>Muito Apetite <span class="n">4</span></li>
+            </ul></div>
+          </div>
+          <p class="build-note">Focada em saquear rápido e sem alertar zumbis. Ladrão já vem com a habilidade de fazer ligação direta em veículos. Discreto e Gracioso evitam detecção; Vigilante aumenta o tempo útil de saque; Ágil com as Mãos acelera as trocas de inventário.</p>
+        </div>
+      </div>
+
+      <div class="build-card">
+        <div class="build-head"><h3>Lenhador (Combate + Construção)</h3><span class="occ-tag">Ocupação sugerida: Lenhador (Lumberjack)</span></div>
+        <div class="build-body">
+          <div class="build-cols">
+            <div><h4 class="pos">Positivos</h4><ul>
+              <li>Habilidoso (Handy) <span class="n">8</span></li>
+              <li>Robusto (Stout) <span class="n">6</span></li>
+              <li>Engenhoso (Crafty) <span class="n">3</span></li>
+            </ul></div>
+            <div><h4 class="neg">Negativos</h4><ul>
+              <li>Propenso a Doenças <span class="n">4</span></li>
+              <li>Curador Lento <span class="n">3</span></li>
+              <li>Estômago Fraco <span class="n">2</span></li>
+              <li>Muito Apetite <span class="n">4</span></li>
+              <li>Chamativo <span class="n">4</span></li>
+            </ul></div>
+          </div>
+          <p class="build-note">Uma build "vikinga": forte em combate corpo a corpo e em construção. Habilidoso melhora Carpintaria, Entalhe, Manutenção e Alvenaria; Robusto aumenta peso carregável; o traço de ocupação Machadista (Ax-pert) deixa os golpes de machado mais rápidos.</p>
+        </div>
+      </div>
+
+      <div class="build-card">
+        <div class="build-head"><h3>Fazendeiro de Gado + Cozinha</h3><span class="occ-tag">Ocupação sugerida: Fazendeiro de Gado (Rancher)</span></div>
+        <div class="build-body">
+          <div class="build-cols">
+            <div><h4 class="pos">Positivos</h4><ul>
+              <li>Pescador (Angler) <span class="n">4</span></li>
+              <li>Cozinheiro Nato (Keen Cook) <span class="n">3</span></li>
+              <li>Entalhador (Whittler) <span class="n">2</span></li>
+            </ul></div>
+            <div><h4 class="neg">Negativos</h4><ul>
+              <li>Propenso a Doenças <span class="n">4</span></li>
+              <li>Curador Lento <span class="n">3</span></li>
+              <li>Estômago Fraco <span class="n">2</span></li>
+            </ul></div>
+          </div>
+          <p class="build-note">Combina a ocupação Fazendeiro de Gado com bônus de cozinha. Pescador soma XP de Pesca; Cozinheiro Nato dá receitas e bônus de Culinária/Açougue; Entalhador aproveita ossos de animais abatidos. Ideal para quem gosta do lado "fazenda" do jogo.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer id="fontes">
+    <p class="eyebrow">10 — Referências</p>
+    <ul>
+      <li>PZwiki (pzwiki.net) — Category:Skill books e páginas individuais de cada livro/habilidade</li>
+      <li>GGRecon — guia de lojas e fitas VHS</li>
+      <li>PZfans.com — referência de livros e magazines da Build 42.19/42.20</li>
+      <li>build42guide.wiki — tier list de traços e guia de ocupações da Build 42.20</li>
+      <li>The Nerd Stash — builds de personagem prontas atualizadas para a Build 42 estável</li>
+      <li>Mobalytics — guias de moodles e agricultura para a Build 42.20</li>
+      <li>PZfans.com — guias de exercício/fitness, doenças, mapa e mecânica de veículos</li>
+      <li>build42guide.wiki — calendário de plantio e catálogo de vans/veículos da Build 42</li>
+      <li>Vortex Gaming / BisectHosting / xGamingServer — guias de locais de spawn, armas e veículos</li>
+    </ul>
+    <p class="fine">Informações compiladas em agosto de 2026, com base na Build 42.20 (estável). Custos de pontos de traços e ocupações podem mudar em atualizações futuras — confira sempre a tela de criação de personagem no jogo.</p>
+  </footer>
+
+</main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('nav.toc a');
+  const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+  const setActive = () => {
+    let idx = 0;
+    sections.forEach((s,i)=>{ if(s && s.getBoundingClientRect().top < 140) idx = i; });
+    links.forEach(a=>a.classList.remove('active'));
+    links[idx].classList.add('active');
+  };
+  document.addEventListener('scroll', setActive, {passive:true});
+  setActive();
+</script>
+</body>
+</html>
